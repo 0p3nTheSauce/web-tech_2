@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=shadow-multiple">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- This imports google fonts -->
+    <link rel="stylesheet" href="stylish.css">
+	<script src="Demo.js" ></script>
+    <title>Grahamstown Grub Stop</title>
+  </head>
+  <body>
+    <header>
+      <section id="topOfPage"></section>
+      <nav>
+        <ul>
+          <li id="logo">
+            <?php 
+             require_once("login.php");
+            ?>
+            <h1 title="Hello there connoisseur">
+              <a href="indexonlyhtml.html" class="font-effect-shadow-multiple">Grahamstown Grub Stop</a>
+          <!-- the class is used for the special effect -->
+            </h1>
+            <?php endif;?>
+          </li>
+          <li class="simplenavlink" id="openTab">
+            <a href="indexonlyhtml.html">Home</a>  
+          </li>
+          <li class="simplenavlink">
+            <a href="aboutc.html">About</a>  
+          </li>
+          <li class="simplenavlink">
+            <a href="contactc.html">Contact</a>  
+          </li>
+          <li class="simplenavlink">
+            <a href="restaurantsc.html">Restaurants</a>  
+          </li>
+          <li class="simplenavlink">
+            <a href="signupc.html">Login</a> 
+          </li>
+          <li class="hamburg">
+          <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+          <a href="javascript:void(0);" class="icon" onclick="displayLinks()">
+            <i class="fa fa-bars" ></i>
+          </a>
+          </li>
+          <li class="simplenavlink">
+          <div class="hiddenLinks">
+            <a href="gallery.html">Gallery</a>
+          </div>
+          </li>
+          <li class="simplenavlink">
+          <div class="hiddenLinks">
+            <a href="playground.html">Playground</a>
+          </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="mobileonly">                          <!--a vertical navbar for mobile-sized screens-->
+      <a href="indexonlyhtml.html" id="activelink">Home</a>
+      <a href="aboutc.html">About</a> 
+      <a href="contactc.html">Contact</a> 
+      <a href="restaurantsc.html">Restaurants</a>
+      <div class="hiddenLinks">
+				<a href="signupc.html">Login</a> 
+			</div>
+      <div class="hiddenLinks">
+				<a href="playground.html">Playground</a>
+			</div>
+      <div class="hiddenLinks">
+				<a href="gallery.html">Gallery</a>
+			</div>
+    </section>
+    <h2 title="We're so pleased to have you">
+      Welcome to your ultimate guide to the culinary wonders of local restaurants, where we explore everything from the most luxurious dining experiences to the most
+      budget-friendly gems in our area.
+    </h2>
+    <figure>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3334.302843032574!2d26.52509347656545!3d-33.31089729038036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srestaurant!5e0!3m2!1sen!2sza!4v1695228033465!5m2!1sen!2sza" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </figure>
+    <p title="So pleased that you took the time to read" class="home">
+      As you navigate the culinary landscape of our town, prepare to embark on a flavorful journey like no other. 
+      From the upscale elegance of <b>Major Frazers</b> to the cozy charm of the <b>Pothole and Donkey</b>, our 
+      comprehensive reviews will be your compass. Discover the delectable creations at the <b>Rat and Parrot</b>  
+      or savor affordable yet delicious bites at the <b>House of Curry</b>. We're here to be your trusted source 
+      for dining experiences, ensuring you find the perfect spot to satisfy your cravings, whether you're 
+      seeking haute cuisine or wallet-friendly options.
+    </p>
+    
+    <div class="clearfix" id="menu">
+      <box class="box" >
+        <div class="dropdown">
+          <h4>
+            Top 5 Rated restaurants
+          </h4>
+          <nav class="dropdown-content">
+            <a href="restaurantsc.html#MJ">Major Frazor</a><br>
+            <a href="restaurantsc.html#PHD">Pothole & Donkey</a><br>
+            <a href="restaurantsc.html#RC">Red Cafe</a><br>
+            <a href="restaurantsc.html#RP">Rat & Parrot</a><br>
+            <a href="restaurantsc.html#P">Pandas</a><br>
+          </nav>
+        </div>
+      </box>
+      
+      <box class="box">
+        <div class="dropdown">
+          <h4>
+            Ongoing Specials
+          </h4>
+          <nav class="dropdown-content">
+            <a href="restaurantsc.html#PHD">Monday Burger special: buy any burger and get a traditional burger for free at the Pothole & Donkey</a><br>
+            <a href="restaurantsc.html#RP">Buy a pizza and get a free Fanta at The Rat</a><br>
+            <a href="restaurantsc.html#FD">Three lasagnes for the price of two at Forke & Dagger</a><br>
+          </nav>
+        </div>
+      </box>
+    </div>
+    
+    
+    <div class="clearfix">
+      <box class="box" >
+        <object data="Media\burger-hungry.gif"></object>
+      </box>
+      <box class="box" >
+        <object data="Media\martin-hungry.gif"></object>
+      </box>
+    </div>
+    
+    <footer id="footer">
+      <p>&copy; Grahamstown Grub Stop</p>
+
+      <a href="https://www.facebook.com/GrubandBarrel/" class="fa fa-facebook"></a>
+      <a href ="http://www.twitter.com" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/watch?v=-9rD2oaqTOQ&t=1s" class="fa fa-youtube"></a>
+      <a href="http:///www.instagram.com" class="fa fa-instagram"></a>
+      <p id="creators">Created by Litha Mabona, Luke Goodall, Caron Rademan</p>
+      <p> email us at <a href="mailto:grahamstowngrubstop@gmail.com">grahamstowngrubstop@gmail.com</a></p>
+      <button><a href="#topOfPage" id="topOfPage">&uarr; Back to top</a></button>
+    </footer>
+  </body>
+</html>

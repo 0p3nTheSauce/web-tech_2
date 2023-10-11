@@ -1,0 +1,740 @@
+
+*{
+    font-family: Helvetica;
+    box-sizing: border-box; /* this means that the padding and border will be included in the element's width and height */
+}
+.center{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+body{
+    background-color:powderblue;
+	font-size: 1.25vw;/*this is a responsive font size */
+}
+/*things that affect the navbar*/
+header{
+    background-color:#3e8ede;
+    width:100%;
+    position: sticky;
+    top: 0;
+    
+}
+
+header li h1 a{
+    /*font-family:Verdana, sans-serif;*/
+	font-family: "Sofia", Verdana, sans-serif;
+    text-decoration:none;
+	font-size: 4vw; /*this is a responsive font size */
+    /* Caron: made the font size of the logo slightly smaller for inline display---check if this is fine */
+	/*Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm.*/
+    color:black;
+    padding: calc(8px + 1.5625vw);
+}
+header nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+header nav ul li{
+    display: inline-block;
+    font-weight:bold;
+}
+.simplenavlink a{
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2vw;
+    padding: calc(8px + 1.5625vw); /*responsive padding based on https://matthewjamestaylor.com/responsive-padding */
+}
+.simplenavlink:hover a{
+    background-color: powderblue;
+    color: black;
+    border-radius:50px;
+}
+#login {
+    color:#fff;
+    font-size:100%;
+    text-decoration: none;
+}
+/* Hide the links inside the navigation menu (except for logo/home) */
+.hiddenLinks  {
+  display: none;
+}
+
+/* Style the hamburger menu */
+.icon {
+  position: relative;
+  max-width: 0.25%;
+  max-height: 1%;
+}
+
+.hamburg a{
+    color: #fff;
+    padding: calc(8px + 1.5625vw); /*responsive padding based on https://matthewjamestaylor.com/responsive-padding */
+}
+
+.hamburg:hover a{
+    background-color: powderblue;
+    color: black;
+    border-radius:50px;
+}
+
+#openTab a{
+    background-color: powderblue;
+    color:black;
+    border-radius:50px;
+}
+/* vertical navbar for mobile viewers*/
+.mobileonly a{
+    display: none;
+    font-size: 1.2vw;
+    text-decoration:none;
+}
+
+@media only screen and (max-width: 960px) { 
+    .simplenavlink{
+        display:none; 
+    }
+    .mobileonly{
+        background:#3e8ede;
+    }
+    .mobileonly a{
+        display:block;
+        width:90%;
+        margin-left:5%;
+        background-color:#3e8ede;
+        padding: calc(8px + 1.5625vw);
+        text-align: center;
+        color:white;
+    }
+    #activelink{
+        background-color: powderblue;
+        color:black;
+        border-radius:100px;
+    }
+    .mobileonly a:hover{
+        background-color: powderblue;
+        color:black;
+        border-radius:100px;
+    }
+
+}
+/*end of mobile navbar things*/
+
+h2 {
+    text-align: center;
+	font-size: 2.5vw;
+	font-family: Georgia, serif;
+}
+h3 {
+    text-align: center;
+	font-size: 2vw;
+	font-family: Georgia, serif;
+}
+h4 {
+    font-size: 1.75vw;
+    font-family: Georgia, serif;
+}
+
+/*styles related to the login and register form*/
+.outer-form-container{
+    width:100%;
+}
+.form-box h1{
+    font-size:3vh;
+}
+.form-box{
+    width:40%;
+    background-color:#fff;
+    padding: calc(20px + 1.5625vw);
+    margin-left:30%;
+    margin-top:5%;
+    text-align:center;
+}
+.input-field{
+    display:inline-block;
+    width:50%;
+    background-color:lightgrey;
+    margin: 3% 0;
+    border-radius:2%;   
+    max-height: 100px;
+    transition: max-height 0.5s; /*when the max height changes, there will be a slow transition*/
+    overflow: hidden; /*content that is outside of the max height will be hidden */
+}
+.input-field input{
+    width:70%;
+    background:transparent;
+    border:0;
+    outline:0;
+    padding: 5% 2%;
+    font-size: 2vh;
+}
+.input-field i{
+    padding-top: 5%;
+    color:#878787;
+}
+.form-box p{
+    font-size: 2vh;
+}
+.form-box a{
+    font-size:2vh;
+    color:#3B5998;
+}
+.btn-field{
+    width:100%;
+}
+.btn-field button{
+    width:30%;
+    display:inline-block;
+    background-color:#3B5998;
+    color:#fff;
+    font-size:100%;
+    padding:5%;
+    margin:5%;
+}
+
+.btn-field button.disable-btn{
+    background-color:lightgrey;
+    color:#878787;
+}
+
+
+
+#pw{
+    display:none;
+}
+#pw ul{
+    list-style-type:none;
+    color:red;
+}
+#pw p{
+    font-size:large;
+}
+
+#rpw{
+    display:none;
+}
+
+#rpw p{
+    font-size:large;
+}
+.errors {
+    color:red;
+}
+#lostpassword{
+    display:none;
+}
+
+
+/*styles related to the contact page*/
+.col{
+    width:100%;                /*single column for mobile layout*/
+    font-size: 2vw;
+    padding: calc(8px + 1.5625vw);
+    color:white;
+    text-align: left;
+    display:block;
+    background-color:#193959;
+}
+/*
+#contactForm input, #contactForm textarea{
+    width:75%;
+    height:100%;
+    outline:none;
+    border:1px solid powderblue;
+}
+*/
+#contactForm input{
+    height:4vh;
+    padding:2vh;
+    width:75%;
+    border:none;
+}
+#contactForm textarea{
+    width:75%;
+    padding:2vh;
+    border:none;
+}
+#contactForm button{
+    border:1px solid #fff;
+    border-radius:0;  
+    color:black; 
+}
+#contactForm button:hover{
+    color:white;
+}
+#contactDetails a{
+    color:white;
+}
+#contactDetails a:hover{
+    color:black;
+    font-weight: bold;
+}
+#containerOfThanks{
+    width:100%;
+    height:100%;
+}
+#thanks{
+    position: absolute;
+    width: 10%; 
+    height: 8%; 
+    background-color: #007bff; 
+    transition: transform 5s ease-in-out, background-color 2s ease-in-out;
+    top: 20%;
+    text-align:center;
+    padding:1%;
+    font-size:small;
+    border-radius:50px;
+}
+/*specific styles for contact forms*/
+@media screen and (min-width:900px){ /*for desktop*/
+    .col{
+        width:50%;
+        display:block;
+        float:left;
+        height:80vw; 
+    }
+}
+
+#degrade{
+    margin:10%;
+}
+#myTable{
+    width:10%;
+    margin-left:10%;
+    color:red;
+}
+#myTable, td {
+    border: 1px solid white;
+  }
+button{
+    background-color: white;
+    color: black;
+    border:none;
+    font-weight: bold;
+    border-radius:50px;
+    font-size:1.5vw;
+    
+}
+
+
+
+button:hover{
+    background-color: #3e8ede;
+    color: white;
+}
+
+#restaurantTable{
+    width:100%;
+    
+}
+
+.restaurantimg{
+    width:20vw;
+    height:15vw;
+    margin:0px;
+    padding:0px;
+}
+
+dl{
+    text-align:left;
+}
+
+/* Responsive layout - makes columns stack on top of each other instead of next to each other*/
+/*multicolumn layout stuff*/
+.column {   /*single column mobile layout*/
+    width: 100%;
+    text-align:center;
+    display:block;
+}
+.column p{
+    font-family: Franklin Gothic Medium;
+    font-size: 2vw;
+}
+.column img{
+    width:70%;
+}
+#column1{
+    background-color:#193959;
+    color: #fff;
+}
+#column2{
+    background-color:#3e8ede;
+}
+#column3{
+    background-color: #193959;
+    color:#fff;
+}
+@media only screen and (min-width: 1200px){ /*multi-column layout for desktops*/
+    .column{
+        width:33.33%;
+        float:left;
+        height:120vh;
+    }
+}
+/*floats layout*/
+.pairedDescriptionAndForm{
+    clear:both;
+}
+.descriptionbox{
+    width:30%;
+    float:left;
+    background-color:powderblue;
+    font-size:1vw;/*edited*/
+    padding:10%;
+}
+.descriptionbox a{
+    text-decoration:none;
+    font-weight:bold;
+    color: black;
+}
+.descriptionbox a:hover{
+    color:navy;
+    text-decoration:underline;
+}
+.entryform{
+    width:70%;
+    float:right;
+    background-color: navy;
+    color: #fff;
+    padding:10%;
+    font-size:2vw;
+}
+
+.entryform button{
+    padding: calc(6px + 1.5625vw);
+    margin-top:calc(6px + 1.5625vw);
+}
+
+.mobilesign{
+    display:none;
+    padding: calc(8px + 1.5625vw);
+}
+@media screen and (max-width:1500px){
+    .descriptionbox{
+        display:none;
+    }
+    .entryform{
+        width: 100%;
+    }
+    .mobilesign{
+        display:inline-block;
+    }
+}
+
+/* footer stylings */
+footer{
+    padding:0.5%;
+    background-color:#3e8ede;
+    text-align:center;
+}
+
+footer button{
+    background-color:powderblue;
+}
+footer button a{
+    color:black;
+    text-decoration:none;
+}
+footer button:hover{
+    background-color:#fff;
+}
+/*icons for social media*/
+footer .fa {
+    padding: 2vw;
+    font-size: 2vw;
+    text-align: center;
+    text-decoration: none;
+    margin: 1vw;
+    border-radius:25%;
+}
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+  }
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  .fa-instagram {
+    background: #125688;
+    color: white;
+  }
+/*general table things*/
+
+table{
+    width:100%;
+}
+/* table of restaurants */
+
+.restaurantTable td{
+    width:25%;
+}
+.restaurantSection{
+    background-color: #2ccce4;
+    border-radius: 50px;
+    padding:2%;
+    width:100%;
+    text-align:center;
+    
+}
+
+.checked{ /*star is checked*/
+    color:orange;
+}
+.restaurantSection a{
+    text-decoration:none;
+}
+.linkToPop {
+    color:black;
+    text-decoration:none;
+}
+.linkToPop a:hover{
+    color:blue;
+    text-decoration:underline;
+}
+
+.hidden{
+    display:none;
+
+}
+/*general stars on the restaurant page*/
+
+.general_stars .fa-star {
+    font-size:large;
+    padding:0.5%;
+    margin-bottom:20%;
+}
+.general_stars{
+    background-color:lightblue;
+    border-radius:50px;
+}
+.general_stars p{
+    padding-top:5%;
+}  
+
+/*style related to the rating form */
+.reviewPageRestaurantSection{
+    background-color: #2ccce4;
+    padding:2%;
+    width:90%;
+    text-align:center;
+    margin:auto;
+    
+}
+
+.star-rating-group input[type="radio"]{
+    display:none;
+}
+
+.star-rating-group .star{
+    display:inline-block;
+    font-size:20px;
+    
+}
+
+.restaurantReviewForm{
+    background-color:white;
+    width:90%;
+    margin: auto;
+    padding:2%;
+}
+
+.restaurantReviewForm textarea{
+    width:100%;
+    font-size:medium;
+
+}
+
+#form-restaurant-section{
+    width:50%; 
+    float:left;
+}
+#commentSection{
+    width:50%;
+    float:right;
+}
+
+#commentSection p{
+    background-color:white;
+    padding:5%;
+    border: 1px solid #878787;
+    width:90%;
+    margin:auto;
+}
+@media screen and (max-width:900px){ /*one block layout for small screen viewers*/
+    .restaurantbloc {
+        width:100%;
+        display:block;
+        text-align:center;
+        font-size:2vw;
+    }
+    .restaurantimg{
+        width:40vw;
+        height:30vw;
+    }
+    
+}
+#submit_review_btn{
+    margin: 2%;
+    background-color:#2ccce4;
+}
+
+#submit_review_btn:hover{
+    background-color:#007bff;
+}
+
+.mandate{
+    color:#bb0000;
+}
+.success-mandate{
+    color:green;
+}
+
+
+/* css animation to use for slideshow*/
+.slider_box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#slider-frame{
+    width: 400px;
+    display: flex;
+    align-items: center;
+    border: 6px solid #fffdd0;
+    border-radius: 5%;
+    overflow:hidden;
+}
+
+#slider-images{
+    display:flex;
+    transition: transform 0.5s ease-in-out
+}
+
+.image-container{
+    flex: 0 0 100%;
+    height: 300px;
+    background-size:cover;
+    background-position : center;   
+}
+
+/*
+.image-container.active{
+    transform: translateX(0);
+}
+*/
+
+#testRedText{
+    color:red;
+}
+
+.image-container img{
+        width: 100%;
+        height: 100%;
+}
+
+
+.slider_controls button{
+    height: 40px;
+    width: 40px;
+    border-radius: 50% ;
+    border: none;
+}
+.prev,
+.next{
+    margin: 0 10px;
+    background: #fffdd0;
+}
+
+#plusPhoto{
+    position: absolute;
+    align-items: center;
+    border-style: dotted;
+    border-width: 10px;
+    border-color: black;
+}
+
+/*this styling is used on the homepage*/
+p.home {
+    padding: 1vw;
+}
+
+/*for the specials and best restaurants menu*/
+.box {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    border-color: white;
+    text-align: center;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/*the drop down effect*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 1vw 15vw;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3e8ede;
+    min-width: 15vw;
+    box-shadow: 0px 8px 16px 0px rgba(255, 252, 252, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/*links inside the dropdown menu*/
+.dropdown-content a {
+    text-decoration: none;
+}
+
+/******************************************************************Playground**************************************************************/
+/* Animation */
+#animationContainer {
+    width: 20vw;
+    height: 20vw;
+    position: relative;
+    background: yellow;
+    margin: auto;
+}
+.animate {
+    width: 2vw;
+    height: 2vw;
+    position: absolute;
+    top: 9vw;
+    right: 9vw;
+    background-color: red;
+    border-radius: 5vw;
+  }
+
+/*Dom methods and properties */
+#likeh2 {
+    text-align: center;
+	font-size: 2.5vw;
+	font-family: Georgia, serif;
+}
+
+#basicp {
+    text-align: left;
+    font-size: 1vw;
+    font-family: Helvetica;
+}
+
+
+

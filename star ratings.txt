@@ -1,0 +1,30 @@
+<section class="rate-group">
+                    <label>Service</label>
+                    <section id="service_stars" class="star-rating">
+                        <i class="fa fa-star" id="s1"></i>
+                        <i class="fa fa-star" id="s2"></i>
+                        <i class="fa fa-star" id="s3"></i>
+                        <i class="fa fa-star" id="s4"></i>
+                        <i class="fa fa-star" id="s5"></i>
+                    </section>
+                </section>
+                <section class="rate-group">
+                    <label>Food</label>
+                    <section id="food_stars" class="star-rating">
+                        <i class="fa fa-star" id="f1"></i>
+                        <i class="fa fa-star" id="f2"></i>
+                        <i class="fa fa-star" id="f3"></i>
+                        <i class="fa fa-star" id="f4"></i>
+                        <i class="fa fa-star" id="f5"></i>
+                    </section>
+                </section>
+                <section class="rate-group">
+                    <label>Ambience</label>
+                    <section id="ambience_stars" class="star-rating">
+                        <i class="fa fa-star" id="a1"></i>
+                        <i class="fa fa-star" id="a2"></i>
+                        <i class="fa fa-star" id="a3"></i>
+                        <i class="fa fa-star" id="a4"></i>
+                        <i class="fa fa-star" id="a5"></i>
+                    </section>
+                </section>
