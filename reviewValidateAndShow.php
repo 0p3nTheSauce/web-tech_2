@@ -4,22 +4,26 @@
     //grab the data using the name value
     if ($_SERVER["REQUEST_METHOD"]=="POST"){ 
         $name = htmlspecialchars($_POST["reviewerName"]);
-        $email = htmlspecialchars($_POST["reviewerEmail"]);
+        $name = trim($name);
+        $name = stripslashes($name);
+        //$email = htmlspecialchars($_POST["reviewerEmail"]);
         $rating = htmlspecialchars($_POST["rating"]);
         $comment = htmlspecialchars($_POST["comment"]);
+        $comment = trim($comment);
+        $comment = stripslashes($comment);
         $date= htmlspecialchars($_POST['date']); 
         $resid = htmlspecialchars($_POST['resid']);
 
         $errors =[];
-        if ($resid==0){
+        if ($resid==0 || $resid ==null){
             $errors['restaurant']="Restaurant must be selected for review";
         }
         if (empty($name)){
             $errors["reviewerName"]="Name is required";
         }
-        if (empty($email)){
+        /*if (empty($email)){
             $errors["reviewerEmail"]="Email is required";
-        }
+        }*/
         if (empty($comment)){
             $errors["comment"]="comment is required";
         }
@@ -28,13 +32,13 @@
         }
         if(empty($errors)){
             echo "<p> Is this working </p>";
-            $eql ="INSERT INTO reviews (resid, rating, comment, commentdate) 
-            VALUES ($resid,'$rating','$comment','$date') ";
+            $eql ="INSERT INTO reviews (resid, rating, comment, commentdate, username) 
+            VALUES ($resid,'$rating','$comment','$date','$name') ";
             $result = $conn->query($eql);
             header("Location: ratingForm.php?success=true");
             exit;
         }
-         else {
+        else {
             // Redirect with errors and field values as query parameters
             $errorString = http_build_query(['errors' => $errors, 'fields' => $_POST]);
             header("Location: ratingForm.php?$errorString");
@@ -51,7 +55,10 @@
             for ($x=0; $x<$starNo;$x++){
                 $stars.="<i class='fa fa-star'></i>";
             }
-            $com=$row['commentdate']."<br/>";
+            $com="User: ";
+            $com.=$row['username'];
+            $com.="<br/>";
+            $com.=$row['commentdate']."<br/>";
             $com.=$stars;
             $com.="<br/>";
             $com .= $row['comment'];

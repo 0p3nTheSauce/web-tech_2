@@ -1,0 +1,11 @@
+EXPERIMENTS FILE
+<label>*Name</label>
+                <section class="input-field">
+                    <input id="reviewerName" type="text" placeholder="Donald Duck" class="personalInput" name="reviewerName">
+                </section>
+                <br>
+                <label>*Email</label><section class="error"><?php if (isset($fields['reviewerEmail'])){ echo "<p class='mandate'>Email is mandatory!</p>";} ?></section>
+                <section class="input-field">
+                    <input id="reviewerEmail" type="text" placeholder="donald@gmail.com" class="personalInput" name="reviewerEmail">
+                </section>
+                <br>

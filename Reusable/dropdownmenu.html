@@ -1,12 +1,14 @@
-<?php 
-//Start the session 
-// session_start();
-//Set session variables 
-if (!isset($_SESSION["loggedIn"])) {
-    $_SESSION["loggedIn"] = false;
-    
-} 
-echo '
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylish.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=shadow-multiple">
+    <!-- This imports google fonts -->
+    <title>Grahamstown Grub Stop</title>
+	<script src="Demo.js" ></script>
+    </head>
   <header>
     <section id="topOfPage"></section>
     <nav>
@@ -28,20 +30,11 @@ echo '
         </li>
         <li class="simplenavlink">
           <a href="restaurants.php">Restaurants</a>  
-        </li>';
-        if ($_SESSION["loggedIn"]) {
-          echo '<li class="simplenavlink">
-                  <a href="signin.php">Logout</a> 
-                </li>';
-        } else {
-          echo  '<li class="simplenavlink">
-                <a href="signup.php">Login</a> 
-                </li>';
-        }
-        
-
-echo 
-        '<li class="hamburg">
+        </li>
+        <li class="simplenavlink">
+          <a href="signup.php">Login</a> 
+        </li>
+        <li class="hamburg">
         <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
         <a href="javascript:void(0);" class="icon" onclick="displayLinks()">
           <i class="fa fa-bars" ></i>
@@ -60,20 +53,6 @@ echo
       </ul>
     </nav>
   </header>
-    <section class="mobileonly">                          <!--a vertical navbar for mobile-sized screens-->
-      <a href="home.php">Home</a>
-      <a href="about.php">About</a> 
-      <a href="contact.php" >Contact</a> 
-      <a href="restaurants.php">Restaurants</a>
-      <div class="hiddenLinks">
-        <a href="signup.php">Login</a> 
-      </div>
-      <div class="hiddenLinks">
-        <a href="playground.php">Playground</a>
-      </div>
-      <div class="hiddenLinks">
-        <a href="gallery.php">Gallery</a>
-      </div>
-    </section>';
 
-?>
+</html>
+

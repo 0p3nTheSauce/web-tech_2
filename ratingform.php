@@ -4,7 +4,17 @@
     include 'dbconnect1.php'; 
     include 'reviewValidateAndShow.php';    
     session_start();
+    //Set session variables 
+    if (!isset($_SESSION["loggedIn"])) {
+        $_SESSION["loggedIn"] = false;
+        echo '<p> User is not logged in</p>';
+    } else if ($_SESSION["loggedIn"]) {
+        echo $_SESSION["userName"], "<p> Is logged in</p>";
+    } else {
+        echo '<p> User is not logged in</p>';
+    }
 ?>
+
 <!DOCTYPE html>
     <html>
     <head>
@@ -109,4 +119,3 @@
     </body>
 
 </html>
-

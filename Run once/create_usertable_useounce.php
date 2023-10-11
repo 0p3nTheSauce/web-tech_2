@@ -21,6 +21,7 @@ if (!$retval){
 echo "database compking selected successfully";
 echo "<br>";
 
+//ALTER TABLE compking.users ADD CONSTRAINT unique (UserName);
 //sql to create table
 /*
 $sql = "CREATE TABLE Users (

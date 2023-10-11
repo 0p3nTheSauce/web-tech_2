@@ -86,25 +86,72 @@
      
     </div> 
     <div id='plusPhoto'>
-      <?php echo
-        "<button id='addPhoto' type='button'>&plus;
-        </button>";
-      ?>
+      <form method='post' action = 'addpho'> 
+        <input type='button' value='Upload file' onclick="form_uplaod()"> 
+      </form>
+
+      <form method='post' action='addphoto.php' enctype='multipart/form-data'>
+            <input type='file' name='file' />
+            <input type='submit' value='Upload' name='btn_upload'>
+      </form>
     </div>
+<!--
+      <script>
+        function form_upload(){
+          
+        }
+      </script> 
+      -->
+      <?php  
       
-    <!-- The dots/circles 
-    <div style="text-align:center">
-      <span class="dot" onclick="currentSlide(0)"></span>
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
-      <span class="dot" onclick="currentSlide(4)"></span>
-      <span class="dot" onclick="currentSlide(5)"></span>
-      <span class="dot" onclick="currentSlide(6)"></span>
-      <span class="dot" onclick="currentSlide(7)"></span>
-      <span class="dot" onclick="currentSlide(8)"></span>
-    </div>
-    -->
+        /*
+echo "<form method='post' action='' enctype='multipart/form-data'>
+            <input type='file' name='file' />
+            <input type='submit' value='Upload' name='btn_upload'>
+          </form>"
+
+        if(isset($_POST['btn_upload'])){
+          $maxsize = 5242880; // 5MB
+          if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
+              $name = $_FILES['file']['name'];
+              $target_dir = "Media/";
+              $target_file = $target_dir . $_FILES["file"]["name"];
+
+              // Select file type
+              $extension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+              // Valid file extensions
+              $extensions_arr = array("mp4","avi","3gp","mov","mpeg");
+
+              // Check extension
+              if( in_array($extension,$extensions_arr) ){
+        
+                  // Check file size
+                  if(($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"] == 0)) {
+                    $_SESSION['message'] = "File too large. File must be less than 5MB.";
+                  }else{
+                    // Upload
+                    if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
+                      // Insert record
+                      $query = "INSERT INTO videos(name,location) VALUES('".$name."','".$target_file."')";
+
+                      mysqli_query($con,$query);
+                      $_SESSION['message'] = "Upload successfully.";
+                    }
+                  }
+
+              }else{
+                  $_SESSION['message'] = "Invalid file extension.";
+              }
+          }else{
+              $_SESSION['message'] = "Please select a file.";
+          }
+          header('location: index.php');
+          exit;
+        }
+        */
+      ?>
+    
     
     <?php include 'Reusable\footer.php';?><!--footer-->
     </body>

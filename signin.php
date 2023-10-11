@@ -1,3 +1,17 @@
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;
+    echo '<p> User is not logged in</p>';
+} else if ($_SESSION["loggedIn"]) {
+    echo $_SESSION["userName"], "<p> Is logged in</p>";
+} else {
+    echo '<p> User is not logged in</p>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -77,7 +91,7 @@ function clean_input($data) {
 
 <section class="outer-form-container">
     <section class="form-box">
-        <h1 id="form_title">Register</h1>
+        <h1 id="form_title">Login</h1>
         <p><span class="errors">* required field</span></p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!--Validation done in in same  file-->
             <p id="error"></p>
@@ -149,6 +163,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 '<p>Email: </p>', $userEmail,
                 '<p>Password: </p>', $userPassword,
                 '<p>User: </p>', $isAdmin;
+                $_SESSION["loggedIn"] = true;
+                $_SESSION["userName"] = $userName;
             } else {
                 echo '<p>sign in unsuccesful</p>', 
                     '<p>Password incorrect</p>'; 

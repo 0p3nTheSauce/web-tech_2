@@ -1,3 +1,12 @@
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;
+    
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +49,7 @@
                             Hours: 11am-10pm
                             </p>
                         <section class="general_stars" id="frazer_stars">
-                            <p><a href="ratingform.php?restaurant=1" class="linkToPop">Rate and review:</a></p>
+                            <p><a href="ratingform.php?restaurant=1" class="linkToPop">Review</a></p>
                             
                             <i class="fa fa-star checked" id="star1"></i>
                             <i class="fa fa-star checked" id="star2"></i>
@@ -64,7 +73,7 @@
                             Hours: 11am - 10pm
                             </p>
                                 <section class="general_stars" id="rat_stars">
-                                <p><a href="ratingform.php?restaurant=2" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=2" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -88,7 +97,7 @@
                             <br>
                             </p>
                             <section class="general_stars" id="lacafe_stars">
-                                <p><a href="ratingform.php?restaurant=3" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=3" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -113,7 +122,7 @@
                             <br>
                             </p>
                             <section class="general_stars" id="redcafe_stars">
-                                <p><a href="ratingform.php?restaurant=4" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=4" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -139,7 +148,7 @@
                             <br>
                             </p>
                             <section class="general_stars" id="donkey_stars">
-                                <p><a href="ratingform.php?restaurant=5" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=5" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -163,7 +172,7 @@
                             <br>
                             </p>
                             <section class="general_stars" id="barista_stars">
-                                <p><a href="ratingform.php?restaurant=6" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=6" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -187,7 +196,7 @@
                             <br>
                             </p>
                             <section class="general_stars" id="curry_stars">
-                                <p><a href="ratingform.php?restaurant=7" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=7" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -212,7 +221,7 @@
                             </p>
                         <!-- Basic review form to rate the websites (will be expanded on with CSS)-->
                         <section class="general_stars" id="revelation_stars">
-                            <p><a href="ratingform.php?restaurant=8" class="linkToPop">Rate and review:</a></p>
+                            <p><a href="ratingform.php?restaurant=8" class="linkToPop">Review</a></p>
                             <i class="fa fa-star checked" id="star1"></i>
                             <i class="fa fa-star checked" id="star2"></i>
                             <i class="fa fa-star checked" id="star3"></i>
@@ -238,7 +247,7 @@
                                 Hours: 11am-10pm
                               </p>
                               <section class="general_stars" id="panda_stars">
-                                <p><a href="ratingform.php?restaurant=9" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=9" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -262,7 +271,7 @@
                             Hours: 11am-10pm
                             </p>
                             <section class="general_stars" id="gino_stars">
-                                <p><a href="ratingform.php?restaurant=10" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=10" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -285,7 +294,7 @@
                                 Hours: 12am-10pm
                             </p>
                             <section class="general_stars" id="fork_stars">
-                                <p><a href="ratingform.php?restaurant=11" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=11" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>
@@ -309,7 +318,7 @@
                             Hours: 8am-5pm
                             </p>
                             <section class="general_stars" id="theatre_stars">
-                                <p><a href="ratingform.php?restaurant=12" class="linkToPop">Rate and review:</a></p>
+                                <p><a href="ratingform.php?restaurant=12" class="linkToPop">Review</a></p>
                                 <i class="fa fa-star checked" id="star1"></i>
                                 <i class="fa fa-star checked" id="star2"></i>
                                 <i class="fa fa-star checked" id="star3"></i>

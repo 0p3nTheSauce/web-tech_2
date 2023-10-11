@@ -1,3 +1,13 @@
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;
+    
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

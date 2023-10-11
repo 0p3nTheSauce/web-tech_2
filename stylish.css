@@ -93,6 +93,8 @@ header nav ul li{
     text-decoration:none;
 }
 
+
+
 @media only screen and (max-width: 960px) { 
     .simplenavlink{
         display:none; 
@@ -155,7 +157,7 @@ h4 {
 }
 .input-field{
     display:inline-block;
-    width:50%;
+    width:100%;
     background-color:lightgrey;
     margin: 3% 0;
     border-radius:2%;   
@@ -491,14 +493,7 @@ table{
 .restaurantSection a{
     text-decoration:none;
 }
-.linkToPop {
-    color:black;
-    text-decoration:none;
-}
-.linkToPop a:hover{
-    color:blue;
-    text-decoration:underline;
-}
+
 
 .hidden{
     display:none;
@@ -518,6 +513,24 @@ table{
 .general_stars p{
     padding-top:5%;
 }  
+.general_stars:hover{
+    background-color: #92c9df;
+}
+.linkToPop{
+    color: white;;
+    display:block;
+    width:30%;
+    margin:auto;
+    padding:1%;
+    border-radius:50px;
+    background-color:#3e8ede;
+}
+
+.linkToPop:hover{
+    background-color:#007bff;
+    font-weight:bolder;
+}
+
 
 /*style related to the rating form */
 .reviewPageRestaurantSection{

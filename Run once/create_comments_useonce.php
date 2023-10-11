@@ -21,6 +21,7 @@ if (!$retval){
 echo "database compking selected successfully";
 echo "<br>";
 
+
 //sql to create table
 $sql = "CREATE TABLE comments(
   commentid INT(3) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -40,6 +41,11 @@ $sql = "CREATE TABLE Comments(
     comment VARCHAR(255) NOT NULL,
     commentDATE DATE NOT NULL)";
 */
+
+//ALTER TABLE compking.reviews
+//ALTER username SET DEFAULT 'Human';
+
+//ALTER TABLE compking.reviews add column username varchar(50) not null;
 if ($conn->query($sql) === TRUE){
     echo "Table restaurants created successfully";
 }

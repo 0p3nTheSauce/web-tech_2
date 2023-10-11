@@ -2,7 +2,14 @@
 //Start the session 
 session_start();
 //Set session variables 
-$_SESSION["loggedIn"] = false;
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;
+    echo '<p> User is not logged in</p>';
+} else if ($_SESSION["loggedIn"]) {
+    echo $_SESSION["userName"], "<p> Is logged in</p>";
+} else {
+    echo '<p> User is not logged in</p>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +38,7 @@ $_SESSION["loggedIn"] = false;
 $nameOK = $emailOK = $passwordOK = $repPasswordOK = true;
 $nameErr = $emailErr = $passwordErr = $repPasswordErr = "";
 $name = $email = $passwordU = $repPassword = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // validation of user input
     if (empty($_POST["name"])) {
         $nameErr = "Name is required";
         $nameOK = false;
@@ -111,19 +118,12 @@ function clean_input($data) {
 
 <section class="outer-form-container">
     <section class="form-box">
-        <?php 
+        <?php
+        $title = "Register"; 
         if ($_SESSION["loggedIn"]) {
-            echo $name, "is logged in";
-        } else {
-            echo "not logged in";
+            $title = "You are already logged in, would you like to create another account?";
         }
-        
-        if ($_SESSION["loggedIn"]) {
-            $formTitle = "You are already logged in. Would you like to register another account?";
-        } else {
-            $formTitle = "Register";
-        }
-        echo "<h1 id='form_title'>" . $formTitle . "</h1>";
+        echo "<h1>" . $title . "</h1>"; 
         ?>
         <!-- <h1 id="form_title">Register</h1> -->
         <p><span class="errors">* required field</span></p>
