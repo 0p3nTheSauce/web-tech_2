@@ -1,4 +1,9 @@
-
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+$_SESSION["loggedIn"] = false;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,7 +111,21 @@ function clean_input($data) {
 
 <section class="outer-form-container">
     <section class="form-box">
-        <h1 id="form_title">Register</h1>
+        <?php 
+        if ($_SESSION["loggedIn"]) {
+            echo $name, "is logged in";
+        } else {
+            echo "not logged in";
+        }
+        
+        if ($_SESSION["loggedIn"]) {
+            $formTitle = "You are already logged in. Would you like to register another account?";
+        } else {
+            $formTitle = "Register";
+        }
+        echo "<h1 id='form_title'>" . $formTitle . "</h1>";
+        ?>
+        <!-- <h1 id="form_title">Register</h1> -->
         <p><span class="errors">* required field</span></p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!--Validation done in in same  file-->
             <p id="error"></p>
@@ -212,18 +231,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 '<p>Email: </p>', $email,
                 '<p>Password: </p>', $passwordU,
                 '<p>Repeated Password: </p>', $repPassword;
-                if ($conn->query($sql) === TRUE) {
-                    echo "New record created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
+            if ($conn->query($sql) === TRUE) {
+                echo "New record created successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            //Set session variables 
+            $_SESSION["loggedIn"] = true;
+            $_SESSION["userName"] = $name;
         }
         
         $conn->close();
     } else {
         echo '<p>signup unsuccessful</p>';
     }
-
+    if ($_SESSION["loggedIn"]) {
+        echo $name, "is logged in";
+    } else {
+        echo "not logged in";
+    }
 }
 
 ?>
