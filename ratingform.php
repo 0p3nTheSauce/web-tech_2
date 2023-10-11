@@ -3,15 +3,16 @@
     date_default_timezone_set('Africa/Johannesburg');
     include 'dbconnect1.php'; 
     include 'reviewValidateAndShow.php';    
+    include 'dealcomments.php';
     session_start();
     //Set session variables 
     if (!isset($_SESSION["loggedIn"])) {
         $_SESSION["loggedIn"] = false;
-        echo '<p> User is not logged in</p>';
+        //echo '<p> User is not logged in</p>';
     } else if ($_SESSION["loggedIn"]) {
-        echo $_SESSION["userName"], "<p> Is logged in</p>";
+        //echo $_SESSION["userName"], "<p> Is logged in</p>";
     } else {
-        echo '<p> User is not logged in</p>';
+        //echo '<p> User is not logged in</p>';
     }
 ?>
 
@@ -26,7 +27,6 @@
     <!-- This imports google fonts -->
     <title>Grahamstown Grub Stop</title>
 	<script src="Demo.js" ></script>
-
     <script defer src="ratingformscript.js"></script>
     </head>
     <body>
@@ -40,10 +40,6 @@
                 echo "<section class='reviewPageRestaurantSection'>";
                 $_SESSION['resid']=$clicked_id;
                 
-                //check if there is a userid in session
-                if (!isset($_SESSION['userid'])){
-                    $_SESSION['userid']='Anonymous';
-                }
                 global $conn;
                 $sql = "SELECT * FROM restaurants WHERE resid = $clicked_id";
                 $result = $conn->query($sql);
@@ -75,14 +71,13 @@
                 $fields =$_GET['fields'];
             }
             ?>
-            <form action="processReview.php" method="POST" >
-            
+            <form action="reviewValidateAndShow.php" method="POST" >
                 <h3 id="resto_title"></h3>
                 <input type='hidden' name ='resid' value='<?php echo $clicked_id; ?>'>
-                <input type= 'hidden' name='date' value= "<?php echo date('Y-m-d'); ?>" >
+                <input type= 'hidden' name='date' value= "<?php echo date('Y-m-d H:i:s'); ?>" >
                 <label>*Name</label><section class="error"><?php if (isset($fields['reviewerName'])){ echo "<p class='mandate'>Name is mandatory!</p>";} ?></section>
                 <section class="input-field">
-                    <input id="reviewerName" type="text" placeholder="Donald Duck" class="personalInput" name="reviewerName">
+                    <input id="reviewerName" type="text" placeholder="Donald Duck" class="personalInput" name="reviewerName" <?php if ($_SESSION["loggedIn"]) { echo "value='" . $_SESSION["userName"] . "'"; } ?>>
                 </section>
                 <br>
                 <label>*Email</label><section class="error"><?php if (isset($fields['reviewerEmail'])){ echo "<p class='mandate'>Email is mandatory!</p>";} ?></section>

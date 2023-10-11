@@ -31,11 +31,11 @@ echo '
         </li>';
         if ($_SESSION["loggedIn"]) {
           echo '<li class="simplenavlink">
-                  <a href="signin.php">Logout</a> 
+                  <a href="loggedIn.php">Logout</a> 
                 </li>';
         } else {
           echo  '<li class="simplenavlink">
-                <a href="signup.php">Login</a> 
+                <a href="signin.php">Login</a> 
                 </li>';
         }
         

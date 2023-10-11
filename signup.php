@@ -2,6 +2,7 @@
 //Start the session 
 session_start();
 //Set session variables 
+
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
     echo '<p> User is not logged in</p>';
@@ -10,6 +11,39 @@ if (!isset($_SESSION["loggedIn"])) {
 } else {
     echo '<p> User is not logged in</p>';
 }
+
+if (!isset($_SESSION["userName"])){
+    $_SESSION["userName"] = "";
+}
+if (!isset($_SESSION["nameErr"])){
+    $_SESSION["nameErr"] = "";
+}
+if (!isset($_SESSION["passwordU"])){
+    $_SESSION["passwordU"] = "";
+}
+if (!isset($_SESSION["passwordErr"])){
+    $_SESSION["passwordErr"] = "";
+}
+if (!isset($_SESSION["repPassword"])){
+    $_SESSION["repPassword"]= "";
+}
+if (!isset($_SESSION["repPasswordErr"])){
+    $_SESSION["repPasswordErr"] = "";
+}
+if (!isset( $_SESSION["email"])){
+    $_SESSION["email"] = "";
+}
+if (!isset($_SESSION["emailErr"])){
+    $_SESSION["emailErr"] = "";
+}
+$name = $_SESSION["userName"];
+$nameErr = $_SESSION["nameErr"];
+$passwordU = $_SESSION["passwordU"];
+$passwordErr = $_SESSION["passwordErr"];
+$repPassword = $_SESSION["repPassword"];
+$repPasswordErr = $_SESSION["repPasswordErr"];
+$email = $_SESSION["email"];
+$emailErr = $_SESSION["emailErr"];
 ?>
 
 <!DOCTYPE html>
@@ -32,102 +66,13 @@ if (!isset($_SESSION["loggedIn"])) {
     </div>
 
 
-<?php
-// The reason the validation php is in the file is so that the fields aren't cleared every time the user hits submit
-// define variable and set to empty values 
-$nameOK = $emailOK = $passwordOK = $repPasswordOK = true;
-$nameErr = $emailErr = $passwordErr = $repPasswordErr = "";
-$name = $email = $passwordU = $repPassword = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") { // validation of user input
-    if (empty($_POST["name"])) {
-        $nameErr = "Name is required";
-        $nameOK = false;
-    } else {
-        $name = clean_input($_POST["name"]);
-        // check if name only contains letters and whitespace 
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
-            $nameErr = "Only letters and white space allowed";
-            $nameOK = false;
-        } 
-        if (strlen($name) >50 ){
-            $nameErr = "Name too long";
-            $nameOK = false;
-        }
-    }
-    if (empty($_POST["email"])) {
-        $emailErr = "Email is required";
-        $emailOK = false;
-    } else {
-        $email = clean_input($_POST["email"]);
-        // check if e-mail address is well-formed
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailErr = "Invalid email format";
-            $emailOK = false;
-        }
-        if (strlen($email) > 50) {
-            $emailErr = "Email is too long";
-            $emailOK = false;
-        }
-    }
-    if (empty($_POST["passwordU"])) {
-        $passwordErr = "Password is required"; 
-        $passwordOK = false;
-    } else {
-        $passwordU = clean_input($_POST["passwordU"]);
-        if (strlen($passwordU) < 8) {
-            $passwordErr = "Password too short";
-            $passwordOK = false;
-        } else if (!preg_match("/[a-z]/", $passwordU)) {
-            $passwordErr = "Password must contain lowercase letters";
-            $passwordOK = false;
-        } else if (!preg_match("/[A-Z]/", $passwordU)) {
-            $passwordErr = "Password must contain uppercase letters";
-            $passwordOK = false;
-        } else if (!preg_match("/[0-9]/", $passwordU)) {
-            $passwordErr = "Password must contain a number";
-            $passwordOK = false;
-        } else if (!preg_match("/[~!*@%&^]/", $passwordU)) {
-            $passwordErr = "Password must contain a special character";
-            $passwordOK = false;
-        } else if (strlen($passwordU) > 15) {
-            $passwordErr = "Password is too long";
-            $passwordOK = false;
-        }
-    }
-    if (empty($_POST["repPassword"])) {
-        $repPasswordErr = "Password is required";
-        $repPasswordOK = false;
-    } else {
-        $repPassword = clean_input($_POST["repPassword"]);
-        if ($repPassword !== $passwordU) {
-            $repPasswordErr = "Passwords do not match";
-            $repPasswordOK = false;
-        }
-    }
-} 
-function clean_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}  
-
-
-
-?>
 
 <section class="outer-form-container">
     <section class="form-box">
-        <?php
-        $title = "Register"; 
-        if ($_SESSION["loggedIn"]) {
-            $title = "You are already logged in, would you like to create another account?";
-        }
-        echo "<h1>" . $title . "</h1>"; 
-        ?>
+        <h1>Register</h1>
         <!-- <h1 id="form_title">Register</h1> -->
         <p><span class="errors">* required field</span></p>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> <!--Validation done in in same  file-->
+        <form method="post" action="signUpValidation.php"> <!--Validation done in in same  file-->
             <p id="error"></p>
             <section class="input-group">
                 <section class="input-field" id="name_field">

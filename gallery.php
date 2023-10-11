@@ -1,3 +1,11 @@
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;  
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,91 +76,54 @@
             <img src="Media\ginos.jpg">
             <div class="text">Ginos</div>
           </section>
-
+          <?php
+          /*
+          //extract all uploaded file's to display
+          $files = glob('uploadedMedia/*');
+          //loop through array for every file
+          foreach($files as $file){
+            $file_name = basename($files);
+            $file_source = "uploadedMedia\\";
+            $file_full = $file_source . $file_name;
+            //adding uplaod files to image carousel
+            echo "<section class='image-container'>";
+            echo "<img src=" . $file_full . ">";
+            echo "<div class='text'>$file_name</div>";
+            echo "</section>";
+          } */
+          ?>
         </section>
       </section>
 
       <br>
-      <p id="imageCount" >10</p>
-
       <div class="slider_controls">
         <button class="next">&raquo</button>
       </div>
-
+      <p id="imageCount" ></p>
       <br>
       <p id="lastModified"></p>
       <br>
       <p id="describer">3</p>
      
-    </div> 
-    <div id='plusPhoto'>
-      <form method='post' action = 'addpho'> 
-        <input type='button' value='Upload file' onclick="form_uplaod()"> 
-      </form>
-
-      <form method='post' action='addphoto.php' enctype='multipart/form-data'>
-            <input type='file' name='file' />
-            <input type='submit' value='Upload' name='btn_upload'>
-      </form>
     </div>
-<!--
-      <script>
-        function form_upload(){
-          
-        }
-      </script> 
-      -->
-      <?php  
+    <?php
+    // working php for upload function
+    //echo "<p>" . $_SESSION['IsAdmin'] . "</p>"
+    
+    //if($_SESSION['IsAdmin'] == true){
+      //developer button to upload files
+        error_reporting(E_ERROR | E_PARSE);
+        echo "<div id='admin_upload'>";
+        echo "<p id='admin_photo_heading'>Admins add photos here</p>";
+        echo "<form method='POST' action='addphoto.php' enctype='multipart/form-data'>";
+        echo "    <input type='file' name='file_upload' />";
+        echo "    <input type='submit' value='Upload' name='img_submit'>";
+        echo "</form>";
+        echo "</div>";
+    //} 
+    
+    ?>
       
-        /*
-echo "<form method='post' action='' enctype='multipart/form-data'>
-            <input type='file' name='file' />
-            <input type='submit' value='Upload' name='btn_upload'>
-          </form>"
-
-        if(isset($_POST['btn_upload'])){
-          $maxsize = 5242880; // 5MB
-          if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
-              $name = $_FILES['file']['name'];
-              $target_dir = "Media/";
-              $target_file = $target_dir . $_FILES["file"]["name"];
-
-              // Select file type
-              $extension = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-              // Valid file extensions
-              $extensions_arr = array("mp4","avi","3gp","mov","mpeg");
-
-              // Check extension
-              if( in_array($extension,$extensions_arr) ){
-        
-                  // Check file size
-                  if(($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"] == 0)) {
-                    $_SESSION['message'] = "File too large. File must be less than 5MB.";
-                  }else{
-                    // Upload
-                    if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
-                      // Insert record
-                      $query = "INSERT INTO videos(name,location) VALUES('".$name."','".$target_file."')";
-
-                      mysqli_query($con,$query);
-                      $_SESSION['message'] = "Upload successfully.";
-                    }
-                  }
-
-              }else{
-                  $_SESSION['message'] = "Invalid file extension.";
-              }
-          }else{
-              $_SESSION['message'] = "Please select a file.";
-          }
-          header('location: index.php');
-          exit;
-        }
-        */
-      ?>
-    
-    
     <?php include 'Reusable\footer.php';?><!--footer-->
     </body>
     

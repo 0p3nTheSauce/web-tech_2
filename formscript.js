@@ -124,7 +124,6 @@ function checkValidLogin(){
     }
 }
 
-
 // //switching to login form
 // login_btn.onclick=function(){
 //     if (login_btn.classList.contains("submission")){
@@ -164,3 +163,9 @@ function checkValidLogin(){
 //     login_btn.classList.remove("submission");
 //     }
 // }
+
+
+let reg_lnk = getElementById("registerlnk");
+reg_lnk.onclick=function() {
+    document.location='signup.php';
+}

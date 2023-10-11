@@ -617,15 +617,31 @@ table{
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: relative;
+    margin: auto;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+
+  /*top:50%;
+    left:50%;
+    transform: translate(-50%,-50%); */
+}
+
+.slider_box p{
+    display:flex;
+    flex-direction: column;
 }
 
 #slider-frame{
+    display: inline-block;
     width: 400px;
     display: flex;
     align-items: center;
     border: 6px solid #fffdd0;
     border-radius: 5%;
     overflow:hidden;
+    margin: auto; /*changes*/
 }
 
 #slider-images{
@@ -640,6 +656,10 @@ table{
     background-position : center;   
 }
 
+#admin_upload{
+    background-color: #878787;
+    width: 200px;
+}
 /*
 .image-container.active{
     transform: translateX(0);

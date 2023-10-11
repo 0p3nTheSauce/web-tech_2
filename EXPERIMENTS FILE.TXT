@@ -9,3 +9,12 @@ EXPERIMENTS FILE
                     <input id="reviewerEmail" type="text" placeholder="donald@gmail.com" class="personalInput" name="reviewerEmail">
                 </section>
                 <br>
+
+                <label>*Name</label><section class="error"><?php if (isset($fields['reviewerName'])){ echo "<p class='mandate'>Name is mandatory!</p>";} ?></section>
+                <label>*Email</label><section class="error"><?php if (isset($fields['reviewerEmail'])){ echo "<p class='mandate'>Email is mandatory!</p>";} ?></section>
+                <section class="input-field">
+                    <input id="reviewerEmail" type="text" placeholder="donald@gmail.com" class="personalInput" name="reviewerEmail">
+                </section>
+
+<!--input id="reviewerName" type="hidden" placeholder="Donald Duck" class="personalInput" name="reviewerName" value='<?php if ($_SESSION["loggedIn"] == true){ echo $_SESSION["userName"];} ?>'-->
+<script defer src="ratingformscript.js"></script>
