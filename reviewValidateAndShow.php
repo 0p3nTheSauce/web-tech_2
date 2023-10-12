@@ -1,20 +1,27 @@
 <?php
-
-    echo "test";
+    session_start();
+    if (!isset($_SESSION["loggedIn"])) {
+        $_SESSION["loggedIn"] = false;
+        //echo '<p> User is not logged in</p>';
+    } else if ($_SESSION["loggedIn"]) {
+        //echo $_SESSION["userName"], "<p> Is logged in</p>";
+    } else {
+        //echo '<p> User is not logged in</p>';
+    }
     include 'dbconnect1.php'; 
     global $conn;
-    echo var_dump($_SERVER["REQUEST_METHOD"]);
+    //echo var_dump($_SERVER["REQUEST_METHOD"]);
     //grab the data using the name value
     if ($_SERVER["REQUEST_METHOD"]=="POST"){ 
         //review fields are commentid, resid, useremail, rating, comment, commentdate, username
         $resid = htmlspecialchars($_POST['resid']);
-        $email = htmlspecialchars($_POST["reviewerEmail"]);
+        $email = htmlspecialchars($_SESSION['email']);
         $rating = htmlspecialchars($_POST["rating"]);
         $comment = htmlspecialchars($_POST["comment"]);
         $comment = trim($comment);
         $comment = stripslashes($comment);
         $date= htmlspecialchars($_POST['date']); 
-        $name = htmlspecialchars($_POST["reviewerName"]);
+        $name = htmlspecialchars($_SESSION['userName']);
         $name = trim($name);
         $name = stripslashes($name);
         $errors =[];
@@ -36,7 +43,7 @@
 
         if(empty($errors)){
             echo $name;
-            echo "<p> Is this working </p>";
+            echo "<p> Is this working? </p>";
             
             $eql ="INSERT INTO reviews (resid, UserEmail, rating, comment, commentdate, username) 
             VALUES ($resid,'$email','$rating','$comment','$date','$name') ";

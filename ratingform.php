@@ -4,7 +4,6 @@
     include 'dbconnect1.php'; 
     include 'reviewValidateAndShow.php';    
     include 'dealcomments.php';
-    session_start();
     //Set session variables 
     if (!isset($_SESSION["loggedIn"])) {
         $_SESSION["loggedIn"] = false;
@@ -36,10 +35,17 @@
             if (isset($_GET['restaurant'])) {
                 //echo "restaurant:";
                 $clicked_id = $_GET['restaurant'];
-                //echo intval($clicked_id);
-                echo "<section class='reviewPageRestaurantSection'>";
                 $_SESSION['resid']=$clicked_id;
-                
+            }
+            else{
+                if (isset($_SESSION['resid'])){
+                    $clicked_id=$_SESSION['resid'];
+                }
+                else {
+                    $clicked_id=1;
+                }
+            } ?>
+                <?php echo "<section class='reviewPageRestaurantSection'>"; 
                 global $conn;
                 $sql = "SELECT * FROM restaurants WHERE resid = $clicked_id";
                 $result = $conn->query($sql);
@@ -58,12 +64,7 @@
                 $hours.=date("H:i",strtotime($row['endTime']));
                 $hours.="pm";
                 echo "<p>".$hours."</p>";
-                echo "</section>";
-            }
-            else{
-                $clicked_id=0;
-            }
-           
+                echo "</section>";           
             ?>
         <section class="restaurantReviewForm">
             <?php if(!empty($_GET['errors'])&& !empty($_GET['fields'])){
@@ -75,17 +76,11 @@
                 <h3 id="resto_title"></h3>
                 <input type='hidden' name ='resid' value='<?php echo $clicked_id; ?>'>
                 <input type= 'hidden' name='date' value= "<?php echo date('Y-m-d H:i:s'); ?>" >
-                <label>*Name</label><section class="error"><?php if (isset($fields['reviewerName'])){ echo "<p class='mandate'>Name is mandatory!</p>";} ?></section>
-                <section class="input-field">
-                    <input id="reviewerName" type="text" placeholder="Donald Duck" class="personalInput" name="reviewerName" <?php if ($_SESSION["loggedIn"]) { echo "value='" . $_SESSION["userName"] . "'"; } ?>>
-                </section>
-                <br>
-                <label>*Email</label><section class="error"><?php if (isset($fields['reviewerEmail'])){ echo "<p class='mandate'>Email is mandatory!</p>";} ?></section>
-                <section class="input-field">
-                    <input id="reviewerEmail" type="text" placeholder="donald@gmail.com" class="personalInput" name="reviewerEmail">
-                </section>
-                <br>
-                <label>Rate the restaurant out of five:</label><br>
+                <?php if ($_SESSION["loggedIn"]) { echo "Hello, ". $_SESSION["userName"]."<br/><br/>"; } ?>
+                <?php if (!($_SESSION["loggedIn"])){echo "<p> Please <a href='signin.php'>log in</a> first to leave a review. </p>";}?>
+                <?php if (($_SESSION["loggedIn"])){ 
+                    echo
+                '<label>Rate the restaurant out of five:</label><br>
                 <section class="star-rating-group">
                     <input type="radio" id="rating-1" name="rating" value="1" />
                     <label for="rating-1" class="fa fa-star" id="star-1"></label>
@@ -98,17 +93,23 @@
                     <input type="radio" id="rating-5" name="rating" value="5" />
                     <label for="rating-5" class="fa fa-star" id="star-5"></label>
                 </section>
-                <br>
-                <label for="comment">*Comments</label><section class="error"><?php if (isset($fields['comment'])){ echo "<p class='mandate'>A written comment is mandatory!</p>";} ?></section>
+                <br>';} ?>
+                <?php if (($_SESSION["loggedIn"])){ 
+                    if (isset($fields['comment'])){ echo "<p class='mandate'>***A written comment is mandatory!</p>";}
+                    echo 
+                '<label for="comment">*Comments</label><section class="error"></section>
                 <section class="comment-group">                    
                     <textarea id="comment" name="comment" placeholder="Share your experience of eating at the restaurant..." rows="20"></textarea><br>
                 </section>
-                <button type="submit" id="submit_review_btn">Submit review</button>
+                <button type="submit" id="submit_review_btn">Submit review</button>';} ?>
                 <section><?php if (!empty($_GET['success'])){echo "<p class='success-mandate'>Your review was submitted successfully</p>";} ?></section>
             </form>   
         </section> <!--form container popup review-->   
         </section><!--contains restaurant image and review-->
-        <section id=commentSection><?php getComments($conn, $clicked_id); ?></section>
+        <section id='commentSection'>
+            <?php 
+            getComments($conn, $clicked_id); ?>
+        </section>
         
        
     </body>

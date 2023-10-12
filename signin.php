@@ -2,12 +2,6 @@
 //Start the session 
 session_start();
 //Set session variables 
-function setter($arraykey) {
-    if (!isset($arraykey)) {
-        $arraykey = "";
-    }
-    return $arraykey;
-}
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
     echo '<p> User is not logged in</p>';
@@ -29,10 +23,10 @@ if (!isset( $_SESSION["email"])){
 if (!isset($_SESSION["emailErr"])){
     $_SESSION["emailErr"] = "";
 }
-$emailErr = setter($_SESSION["emailErr"]);
-$passwordErr = setter($_SESSION["passwordErr"]);
-$email = setter($_SESSION["email"]);
-$passwordU = setter($_SESSION["passwordU"]);
+$emailErr = $_SESSION["emailErr"];
+$passwordErr = $_SESSION["passwordErr"];
+$email = $_SESSION["email"];
+$passwordU = $_SESSION["passwordU"];
 ?>
 
 <!DOCTYPE html>

@@ -531,7 +531,9 @@ table{
     font-weight:bolder;
 }
 
-
+.delBut{
+    text-align:right;
+}
 /*style related to the rating form */
 .reviewPageRestaurantSection{
     background-color: #2ccce4;
@@ -573,13 +575,26 @@ table{
     width:50%;
     float:right;
 }
+#commentSection a{
+    text-align: right;
+    display:block;
+    color:rgb(97, 8, 8);
+    font-weight:bold;
+}
 
-#commentSection p{
+#commentSection a:hover{
+    text-align: right;
+    display:block;
+    color:red;
+}
+
+#commentSection div{
     background-color:white;
     padding:5%;
     border: 1px solid #878787;
     width:90%;
     margin:auto;
+    bottom: 0;
 }
 @media screen and (max-width:900px){ /*one block layout for small screen viewers*/
     .restaurantbloc {
@@ -631,6 +646,7 @@ table{
 .slider_box p{
     display:flex;
     flex-direction: column;
+    overscroll-behavior: contain;
 }
 
 #slider-frame{
@@ -638,11 +654,23 @@ table{
     width: 400px;
     display: flex;
     align-items: center;
-    border: 6px solid #fffdd0;
+    border: 6px solid #007bff;
     border-radius: 5%;
     overflow:hidden;
     margin: auto; /*changes*/
 }
+/* text for carousel pictures*/
+.text {
+    background-color: #878787;
+    color: whitesmoke;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+  }
 
 #slider-images{
     display:flex;
@@ -659,12 +687,8 @@ table{
 #admin_upload{
     background-color: #878787;
     width: 200px;
+    border-radius: 3%;
 }
-/*
-.image-container.active{
-    transform: translateX(0);
-}
-*/
 
 #testRedText{
     color:red;
@@ -685,7 +709,7 @@ table{
 .prev,
 .next{
     margin: 0 10px;
-    background: #fffdd0;
+    background: #007bff;
 }
 
 #plusPhoto{

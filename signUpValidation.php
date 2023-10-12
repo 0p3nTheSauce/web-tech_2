@@ -123,11 +123,12 @@ if ($nameOK && $emailOK && $passwordOK && $repPasswordOK ) {
                 VALUES ('$email', '$name', 0, '$passwordU')";
         if ($conn->query($sql) === TRUE) {
             $createdSuccessfully = true;
+            //Set session variables 
+            $_SESSION["loggedIn"] = true;
+            $_SESSION["isAdmin"] = $isAdmin;
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
-        //Set session variables 
-        $_SESSION["loggedIn"] = true;
     }
     
     $conn->close();

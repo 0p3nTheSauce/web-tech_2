@@ -44,7 +44,7 @@ if (!isset($_SESSION["loggedIn"])) {
 
           <section class="image-container">
             <img src="Media\Fork&Dagger.jpg">
-            <div class="text">Fork</div>
+            <div class="text">Fork&Dagger</div>
           </section>
 
           <section class="image-container">
@@ -77,6 +77,25 @@ if (!isset($_SESSION["loggedIn"])) {
             <div class="text">Ginos</div>
           </section>
           <?php
+          $folder = 'uploadedMedia/'; //directory or folder to loop through
+          $checkFiles = scandir($folder); //scan folder content
+          $fileCount = count($checkFiles); //count number of files in the directory
+          $i = 0; //set for iteration;
+          while($i < $fileCount){
+              $file = $checkFiles[$i]; //each file is stored in an array ... 
+                if($file = '.' || $file = '..'){
+                  //echo nothing
+                }else{
+                  echo "<p>". $file ."</p>"; // file names are printed out
+                }
+            }
+            /*
+          $files = glob('uploadedMedia/*');
+          foreach($files as $file){
+            $file_name = $files['basename'];
+            echo "<p>" . $file_name . "</p>";
+          }
+          */
           /*
           //extract all uploaded file's to display
           $files = glob('uploadedMedia/*');
@@ -99,18 +118,17 @@ if (!isset($_SESSION["loggedIn"])) {
       <div class="slider_controls">
         <button class="next">&raquo</button>
       </div>
-      <p id="imageCount" ></p>
-      <br>
-      <p id="lastModified"></p>
-      <br>
-      <p id="describer">3</p>
-     
+          <div class="slider_info">
+            <p id="imageCount" ></p>
+            <br>
+            <p id="lastModified"></p>
+            <br>
+            <p id="describer">3</p>
+          </div>
     </div>
     <?php
-    // working php for upload function
-    //echo "<p>" . $_SESSION['IsAdmin'] . "</p>"
-    
-    //if($_SESSION['IsAdmin'] == true){
+    //upload section for admins ONLY!!
+    if($_SESSION['isAdmin'] == true){
       //developer button to upload files
         error_reporting(E_ERROR | E_PARSE);
         echo "<div id='admin_upload'>";
@@ -120,8 +138,7 @@ if (!isset($_SESSION["loggedIn"])) {
         echo "    <input type='submit' value='Upload' name='img_submit'>";
         echo "</form>";
         echo "</div>";
-    //} 
-    
+    }  
     ?>
       
     <?php include 'Reusable\footer.php';?><!--footer-->

@@ -91,6 +91,7 @@ if ($emailOK && $passwordOK) { //                          logging in
             $loginSuccessful = true;
             $_SESSION["loggedIn"] = true;
             $_SESSION["userName"] = $userName;
+            $_SESSION["isAdmin"] = $isAdmin;
         } else {; 
             $loginSuccessful = false;
             $passwordErr = "Incorrect password";
