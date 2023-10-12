@@ -4,7 +4,9 @@
 //Set session variables 
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
-    
+} 
+if (!isset($_SESSION["IsAdmin"])) {
+  $_SESSION["IsAdmin"] = false;
 } 
 echo '
   <header>
@@ -51,29 +53,32 @@ echo
         <div class="hiddenLinks">
           <a href="gallery.php">Gallery</a>
         </div>
-        </li>
-        <li class="simplenavlink">
-        <div class="hiddenLinks">
-          <a href="playground.php">Playground</a>
-        </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
-    <section class="mobileonly">                          <!--a vertical navbar for mobile-sized screens-->
-      <a href="home.php">Home</a>
-      <a href="about.php">About</a> 
-      <a href="contact.php" >Contact</a> 
-      <a href="restaurants.php">Restaurants</a>
-      <div class="hiddenLinks">
-        <a href="signup.php">Login</a> 
-      </div>
-      <div class="hiddenLinks">
-        <a href="playground.php">Playground</a>
-      </div>
-      <div class="hiddenLinks">
-        <a href="gallery.php">Gallery</a>
-      </div>
-    </section>';
+        </li>';
+        if ($_SESSION["isAdmin"]) { // only admins can view
+          echo '<li class="simplenavlink">
+          <div class="hiddenLinks">
+            <a href="playground.php">Playground</a>
+          </div>
+          </li>';
+        }
+echo 
+        '</ul>
+        </nav>
+      </header>
+        <section class="mobileonly">                          <!--a vertical navbar for mobile-sized screens-->
+          <a href="home.php">Home</a>
+          <a href="about.php">About</a> 
+          <a href="contact.php" >Contact</a> 
+          <a href="restaurants.php">Restaurants</a>
+          <div class="hiddenLinks">
+            <a href="signup.php">Login</a> 
+          </div>
+          <div class="hiddenLinks">
+            <a href="playground.php">Playground</a>
+          </div>
+          <div class="hiddenLinks">
+            <a href="gallery.php">Gallery</a>
+          </div>
+        </section>';
 
 ?>

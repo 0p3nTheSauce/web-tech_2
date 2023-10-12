@@ -4,11 +4,11 @@ session_start();
 //Set session variables 
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
-    echo '<p> User is not logged in</p>';
+    // echo '<p> User is not logged in</p>';                                        testing 
 } else if ($_SESSION["loggedIn"]) {
-    echo $_SESSION["userName"], "<p> Is logged in</p>";
+    // echo $_SESSION["userName"], "<p> Is logged in</p>";
 } else {
-    echo '<p> User is not logged in</p>';
+    // echo '<p> User is not logged in</p>';
 }
 
 if (!isset($_SESSION["passwordU"])){

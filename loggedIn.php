@@ -4,11 +4,11 @@ session_start();
 //Set session variables 
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
-    echo '<p> User is not logged in</p>';
+    // echo '<p> User is not logged in</p>';                                        testing 
 } else if ($_SESSION["loggedIn"]) {
-    echo $_SESSION["userName"], "<p> Is logged in</p>";
+    // echo $_SESSION["userName"], "<p> Is logged in</p>";
 } else {
-    echo '<p> User is not logged in</p>';
+    // echo '<p> User is not logged in</p>';
 }
 
 if (!isset($_SESSION["passwordU"])){
@@ -17,9 +17,16 @@ if (!isset($_SESSION["passwordU"])){
 if (!isset($_SESSION["passwordErr"])){
     $_SESSION["passwordErr"] = "";
 }
+if (!isset($_SESSION["isAdmin"])){
+    $_SESSION["isAdmin"] = "";
+}
 $passwordU = $_SESSION["passwordU"];
 $passwordErr = $_SESSION["passwordErr"];
-
+if ($_SESSION["isAdmin"]) {
+    $usertype = "Admin";
+} else {
+    $usertype = "User";
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +51,7 @@ $passwordErr = $_SESSION["passwordErr"];
 
 <section class="outer-form-container"> <!--Logout -->
     <section class="form-box">
-        <h1 id="form_title">Logged in</h1>
+        <h1 id="form_title"><?php echo $_SESSION["userName"];?> Is logged in as <?php echo $usertype;?></h1>
         <form method="post" action="signOut.php" onsubmit="return confirmSubmissionLogout() " > 
             <section class="input-group">
                 <section class="btn-field"> 

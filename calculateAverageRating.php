@@ -43,5 +43,22 @@ function calcAvs(){
     }
 }
 
+function doStars($rid){
+    global $conn;
+    $eql = "SELECT * FROM restaurants WHERE resid = $rid";
+        $result = $conn->query($eql);
+        while ($row=$result->fetch_assoc()){
+            $starNo = $row['averageRating'];
+            $stars="";
+            for ($x=0; $x<$starNo;$x++){
+                $stars.="<i class='fa fa-star checked'></i>";
+            }
+            for ($y=0;$y<(5-$starNo);$y++){
+                $stars.="<i class='fa fa-star'></i>";
+            }
+        }
+    echo $stars;
+}
+
 ?>
 

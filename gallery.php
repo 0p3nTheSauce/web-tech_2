@@ -20,11 +20,13 @@ if (!isset($_SESSION["loggedIn"])) {
   <script defer src="gallery.js"></script>
     <title>Grahamstown Grub Stop</title>
   </head>
-  <body onload="getImageCount()">
+  <body onload="getImageCount();"> <!-- onload function to initialise-->
   <?php include 'Reusable\heading.php';
         include 'addPhoto.php';
+        
         error_reporting(E_ERROR | E_PARSE);
   ?><!--heading-->
+  <h2>Gallery</h2>
     <div class="slider_box">
       <?php
       error_reporting(E_ERROR | E_PARSE);
@@ -80,7 +82,7 @@ if (!isset($_SESSION["loggedIn"])) {
             <div class="text">Ginos</div>
           </section>
           <?php
-            error_reporting(E_ERROR | E_PARSE);
+          
             /*
           $files = glob('uploadedMedia/*');
           foreach($files as $file){
@@ -125,7 +127,7 @@ if (!isset($_SESSION["loggedIn"])) {
         echo "<p id='admin_photo_heading'>Admins add photos here</p>";
         echo "<form method='POST' action='addphoto.php' enctype='multipart/form-data'>";
         echo "    <input type='file' name='file_upload' />";
-        echo "    <input type='submit' value='Upload' name='img_submit'>";
+        echo "    <input type='submit' value='Upload' name='img_submit' ";
         echo "</form>";
     }
 
