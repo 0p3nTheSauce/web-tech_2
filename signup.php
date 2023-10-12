@@ -44,6 +44,7 @@ $repPassword = $_SESSION["repPassword"];
 $repPasswordErr = $_SESSION["repPasswordErr"];
 $email = $_SESSION["email"];
 $emailErr = $_SESSION["emailErr"];
+
 ?>
 
 <!DOCTYPE html>

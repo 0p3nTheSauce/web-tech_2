@@ -23,9 +23,12 @@ if (!isset($_SESSION["loggedIn"])) {
   <body onload="getImageCount()">
   <?php include 'Reusable\heading.php';
         include 'addPhoto.php';
+        error_reporting(E_ERROR | E_PARSE);
   ?><!--heading-->
     <div class="slider_box">
-
+      <?php
+      error_reporting(E_ERROR | E_PARSE);
+      ?>
       <div class="slider_controls">
         <button class="prev">&laquo</button>
       </div>
@@ -77,7 +80,7 @@ if (!isset($_SESSION["loggedIn"])) {
             <div class="text">Ginos</div>
           </section>
           <?php
-          
+            error_reporting(E_ERROR | E_PARSE);
             /*
           $files = glob('uploadedMedia/*');
           foreach($files as $file){
@@ -107,13 +110,11 @@ if (!isset($_SESSION["loggedIn"])) {
       <div class="slider_controls">
         <button class="next">&raquo</button>
       </div>
-          <div class="slider_info">
-            <p id="imageCount" ></p>
-            <br>
-            <p id="lastModified"></p>
-            <br>
-            <p id="describer">3</p>
-          </div>
+        <div class="slider_info">
+          <p id="imageCount" ></p>
+          <br>
+          <p id="lastModified"></p>
+        </div>
     </div>
     <?php
     //upload section for admins ONLY!!
@@ -126,6 +127,9 @@ if (!isset($_SESSION["loggedIn"])) {
         echo "    <input type='file' name='file_upload' />";
         echo "    <input type='submit' value='Upload' name='img_submit'>";
         echo "</form>";
+    }
+
+        /*
         $folder = 'uploadedMedia/'; //directory or folder to loop through
           $checkFiles = scandir($folder); //scan folder content
           $fileCount = count($checkFiles); //count number of files in the directory
@@ -138,8 +142,8 @@ if (!isset($_SESSION["loggedIn"])) {
                   echo "<p>". $file ."</p>"; // file names are printed out
                 }
             }
-        echo "</div>";
-    }  
+        echo "</div>"; */
+     
     ?>
       
     <?php include 'Reusable\footer.php';?><!--footer-->

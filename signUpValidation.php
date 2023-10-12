@@ -118,9 +118,10 @@ if ($nameOK && $emailOK && $passwordOK && $repPasswordOK ) {
             break;
         }
     }
-    if (!$userExists) {
+    if (!$userExists) { //sign up successful 
+        $hashedpassword = password_hash($passwordU, PASSWORD_DEFAULT);
         $sql = "INSERT INTO users (UserEmail, UserName, IsAdmin, UserPassword)
-                VALUES ('$email', '$name', 0, '$passwordU')";
+                VALUES ('$email', '$name', 0, '$hashedpassword')";
         if ($conn->query($sql) === TRUE) {
             $createdSuccessfully = true;
             //Set session variables 
@@ -141,6 +142,7 @@ $_SESSION["repPassword"] =$repPassword;
 $_SESSION["repPasswordErr"] =$repPasswordErr;
 $_SESSION["email"] = $email;
 $_SESSION["emailErr"] = $emailErr;
+
 if ($createdSuccessfully) {
     header('Location: loggedIn.php');
 } else {

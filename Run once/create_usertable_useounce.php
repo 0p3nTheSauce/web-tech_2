@@ -32,12 +32,13 @@ $sql = "CREATE TABLE Users (
 
 
 */
-
-// if ($conn->query($sql) === TRUE) {
-//   echo "Table Users created successfully";
-// } else {
-//   echo "Error creating table: " . $conn->error;
-// }
+// $sql = "ALTER TABLE Users 
+// MODIFY UserPassword VARCHAR(100)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table Users ALTERED successfully";
+} else {
+  echo "Error ALTERING table: " . $conn->error;
+}
 $conn->close();
 
 ?>   

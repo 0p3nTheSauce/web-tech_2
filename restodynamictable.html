@@ -210,7 +210,7 @@ if (!isset($_SESSION["loggedIn"])) {
                             <h3>
                             Revelations
                             </h3>
-                            <a href="https://www.facebook.com/RevelationsCoffeeShop/" target="_blank">
+                            <a href="https://oppositethearch.co.za" target="_blank">
                             <img src="Media\revelations.jpg" alt="restaurant" class="restaurantimg">
                             </a>
                             <p>Restaurant & Cafe<br>

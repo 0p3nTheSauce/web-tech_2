@@ -43,10 +43,14 @@ if ($uploadOk == 0) {
 } else {
   if (move_uploaded_file($_FILES["file_upload"]["tmp_name"], $target_file)) {
     echo "The file ". htmlspecialchars( basename( $_FILES["file_upload"]["name"])). " has been uploaded.";
+    sleep(5);
+    echo header("Location: gallery.php");
   } else {
     echo "Sorry, there was an error uploading your file.";
+    sleep(5);
+    echo header("Location: gallery.php");
   }
-  header("Location: gallery.php");
+  
 }
 
 ?>

@@ -23,10 +23,12 @@ if (!isset( $_SESSION["email"])){
 if (!isset($_SESSION["emailErr"])){
     $_SESSION["emailErr"] = "";
 }
+
 $emailErr = $_SESSION["emailErr"];
 $passwordErr = $_SESSION["passwordErr"];
 $email = $_SESSION["email"];
 $passwordU = $_SESSION["passwordU"];
+
 ?>
 
 <!DOCTYPE html>

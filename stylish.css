@@ -645,9 +645,7 @@ table{
     height: 100vh;
     position: relative;
     margin: auto;
-    border: solid;
-    border-width: 2px;
-    border-color: black;
+    
 
   /*top:50%;
     left:50%;

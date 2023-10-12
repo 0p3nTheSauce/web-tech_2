@@ -19,6 +19,7 @@ if (!isset($_SESSION["passwordErr"])){
 }
 $passwordU = $_SESSION["passwordU"];
 $passwordErr = $_SESSION["passwordErr"];
+
 ?>
 
 <!DOCTYPE html>

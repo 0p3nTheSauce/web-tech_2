@@ -13,6 +13,7 @@ $_SESSION["passwordU"] = "";
 $emailOK = $passwordOK = true;
 $emailErr = $passwordErr = "";
 $email = $passwordU = "";
+$verified = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["email"])) {
         $emailErr = "Email is required";
@@ -87,11 +88,14 @@ if ($emailOK && $passwordOK) { //                          logging in
         }
     }
     if ($userExists) {
-        if ($passwordU == $userPassword) {
+        // The passwords are hashed
+        $verified = password_verify($passwordU, $userPassword);
+        if ($verified) {
             $loginSuccessful = true;
             $_SESSION["loggedIn"] = true;
             $_SESSION["userName"] = $userName;
             $_SESSION["isAdmin"] = $isAdmin;
+            
         } else {; 
             $loginSuccessful = false;
             $passwordErr = "Incorrect password";
@@ -103,6 +107,7 @@ $_SESSION["emailErr"] = $emailErr;
 $_SESSION["passwordErr"] = $passwordErr;
 $_SESSION["email"] = $email;
 $_SESSION["passwordU"] = $passwordU;
+
 if ($loginSuccessful) {
     header('Location: loggedIn.php');
 } else {

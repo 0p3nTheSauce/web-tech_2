@@ -32,9 +32,3 @@ function getImageCount(){
     let lastAdded = document.lastModified;
     document.getElementById("lastModified").innerHTML = "Images last modified: " + lastAdded;
 }
-/*
-function describeImage(id){
-    document.getElementById("describer").innerHTML
-    = document.getElementById(id).nextSibling.innerHTML;
-}
-*/
