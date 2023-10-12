@@ -1,4 +1,4 @@
-function confirmSubmission() {
+function confirmSubmissionDelete() {
     if (confirm("Are you sure you want to delete this item?")) {
       return true; // Proceed with the form submission
     } else {
@@ -6,3 +6,12 @@ function confirmSubmission() {
       return false; // Prevent the form from being submitted
     }
   }
+
+function confirmSubmissionLogout() {
+  if (confirm("Are you sure you want to logout?")) {
+    return true; // Proceed with the form submission
+  } else {
+    document.getElementById("demo").innerHTML = "Logout canceled.";
+    return false; // Prevent the form from being submitted
+  }
+}

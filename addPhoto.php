@@ -4,6 +4,8 @@ $target_file = $target_dir . basename($_FILES["file_upload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 error_reporting(E_ERROR | E_PARSE);
+echo " <script type='text/JavaScript'> 
+  function onclick()"
 // Check if image file is a actual image or fake image
 if(isset($_POST["img_submit"])) {
   $check = getimagesize($_FILES["file_upload"]["tmp_name"]);

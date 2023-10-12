@@ -45,7 +45,7 @@ $passwordErr = $_SESSION["passwordErr"];
 <section class="outer-form-container"> <!--Logout -->
     <section class="form-box">
         <h1 id="form_title">Logged in</h1>
-        <form method="post" action="signOut.php"> 
+        <form method="post" action="signOut.php" onsubmit="return confirmSubmissionLogout() " > 
             <section class="input-group">
                 <section class="btn-field"> 
                 <button type = "submit" id="login_btn" class="submission">Logout</button>
@@ -60,7 +60,7 @@ $passwordErr = $_SESSION["passwordErr"];
     <section class="form-box">
         <h1 id="form_title">Delete account</h1>
         <p><span class="errors">* required field</span></p>
-        <form method="post" action="deleteAccount.php" onsubmit="return confirmSubmission()"> 
+        <form method="post" action="deleteAccount.php" onsubmit="return confirmSubmissionDelete()"> 
         <p id="error"></p>
             <section class="input-field">
                 <i class="material-symbols-outlined">lock</i>

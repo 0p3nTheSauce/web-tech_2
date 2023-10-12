@@ -23,7 +23,8 @@ if (!isset($_SESSION["loggedIn"])) {
     </head>
     <body id="restaurantBody">
     <?php include 'Reusable\heading.php';?><!--heading-->
-
+    <?php include 'calculateAverageRating.php';?>
+    <?php 
         <h2>Independent restaurants of Grahamstown</h2>
                 <!--image dimensions width="300" height="200"-->
                 <!--style of restaurant sections:-->
