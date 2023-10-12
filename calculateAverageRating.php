@@ -1,24 +1,18 @@
 <?php
-include dbconnect1;
-$sql =  
-"SELECT
-    r.resid,
-    r.resname,
-    AVG(re.rating) AS averageRating
-FROM
-    restaurants r
-LEFT JOIN
-    reviews re ON r.resid = re.resid
-GROUP BY
-    r.resid, r.resname;
-";
+include 'dbconnect1.php';
 
-if ($conn->query($sql)==TRUE){
-    echo "query executed successfully";
-  }
-  else{
-    echo "Error ".$sql ."<br>" .$conn->error;
-  }
-$conn->close();  
-
+$sql = "SELECT * FROM reviews;
+$result = $conn->query($sql);
+while ($row=$result->fetch_assoc()){
+      $rating=$row['rating'];
+$sql = "SELECT AVG(rating) as av_rating FROM reviews WHERE resid = 1";
+$result = $conn->query($sql);
+if ($result){
+    $row=$result->fetch_assoc();
+    $ave=$row['av_rating'];
+    echo $ave;
+}
+else{
+    echo $conn->error;
+}
 ?>

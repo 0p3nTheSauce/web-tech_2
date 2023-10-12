@@ -32,7 +32,8 @@ $passwordErr = $_SESSION["passwordErr"];
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="stylish.css">
 		<script src="Demo.js" ></script>
-    <script defer src="formscript.js"></script>
+        <script defer src="formscript.js"></script>
+        <script defer src="logingFunctionality.js"></script>
         <title>Grahamstown Grub Stop</title>
     </head>
     <body >
@@ -58,7 +59,7 @@ $passwordErr = $_SESSION["passwordErr"];
     <section class="form-box">
         <h1 id="form_title">Delete account</h1>
         <p><span class="errors">* required field</span></p>
-        <form method="post" action="deleteAccount.php"> 
+        <form method="post" action="deleteAccount.php" onsubmit="return confirmSubmission()"> 
         <p id="error"></p>
             <section class="input-field">
                 <i class="material-symbols-outlined">lock</i>
@@ -70,6 +71,7 @@ $passwordErr = $_SESSION["passwordErr"];
                 </section>
             </section><!--input-group-->
         </form>
+        <p id="demo"></p>
         
     </section>
 </section>

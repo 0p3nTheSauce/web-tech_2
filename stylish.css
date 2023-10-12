@@ -148,6 +148,7 @@ h4 {
     font-size:3vh;
 }
 .form-box{
+    border-radius: 50px;
     width:40%;
     background-color:#fff;
     padding: calc(20px + 1.5625vw);
@@ -595,6 +596,16 @@ table{
     width:90%;
     margin:auto;
     bottom: 0;
+}
+#successfulDel{
+    background-color:white;
+    font-weight:bolder;
+    width: 70%;
+    text-align:center;
+    margin:auto;
+    padding:2%;
+    margin-top: 1%;
+    margin-bottom:1%;
 }
 @media screen and (max-width:900px){ /*one block layout for small screen viewers*/
     .restaurantbloc {

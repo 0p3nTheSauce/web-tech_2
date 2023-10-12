@@ -30,12 +30,14 @@ $sql = "CREATE TABLE Users (
     IsAdmin BOOLEAN NOT NULL,
     UserPassword VARCHAR(15) NOT NULL)";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Table Users created successfully";
-} else {
-    echo "Error creating table: " . $conn->error;
-}
 
-$conn->close();
 */
+
+// if ($conn->query($sql) === TRUE) {
+//   echo "Table Users created successfully";
+// } else {
+//   echo "Error creating table: " . $conn->error;
+// }
+$conn->close();
+
 ?>   

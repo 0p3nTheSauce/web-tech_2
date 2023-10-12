@@ -77,18 +77,7 @@ if (!isset($_SESSION["loggedIn"])) {
             <div class="text">Ginos</div>
           </section>
           <?php
-          $folder = 'uploadedMedia/'; //directory or folder to loop through
-          $checkFiles = scandir($folder); //scan folder content
-          $fileCount = count($checkFiles); //count number of files in the directory
-          $i = 0; //set for iteration;
-          while($i < $fileCount){
-              $file = $checkFiles[$i]; //each file is stored in an array ... 
-                if($file = '.' || $file = '..'){
-                  //echo nothing
-                }else{
-                  echo "<p>". $file ."</p>"; // file names are printed out
-                }
-            }
+          
             /*
           $files = glob('uploadedMedia/*');
           foreach($files as $file){
@@ -137,6 +126,18 @@ if (!isset($_SESSION["loggedIn"])) {
         echo "    <input type='file' name='file_upload' />";
         echo "    <input type='submit' value='Upload' name='img_submit'>";
         echo "</form>";
+        $folder = 'uploadedMedia/'; //directory or folder to loop through
+          $checkFiles = scandir($folder); //scan folder content
+          $fileCount = count($checkFiles); //count number of files in the directory
+          $i = 0; //set for iteration;
+          while($i < $fileCount){
+              $file = $checkFiles[$i]; //each file is stored in an array ... 
+                if($file = '.' || $file = '..'){
+                  //echo nothing
+                }else{
+                  echo "<p>". $file ."</p>"; // file names are printed out
+                }
+            }
         echo "</div>";
     }  
     ?>

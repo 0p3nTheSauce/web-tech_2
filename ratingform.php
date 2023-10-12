@@ -108,6 +108,16 @@
         </section><!--contains restaurant image and review-->
         <section id='commentSection'>
             <?php 
+            if (isset($_GET['deletion'])) {
+                echo "<section id='successfulDel'>";
+                if ($_GET['deletion']=='success'){
+                    echo "<span>&#9989;</span> Your comment was deleted successfully";
+                }
+                else{
+                    echo "Your mark will remain forever";
+                }
+                echo "</section>";
+            }
             getComments($conn, $clicked_id); ?>
         </section>
         

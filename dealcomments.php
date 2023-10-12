@@ -1,5 +1,5 @@
 <?php 
-
+    include 'deletecom.php';
     if (!isset($_SESSION["loggedIn"])) {
         $_SESSION["loggedIn"] = false;
         //echo '<p> User is not logged in</p>';
@@ -14,7 +14,7 @@
         $sql = "SELECT * FROM reviews WHERE resid = $clicked_id";
         $result = $conn->query($sql);
         while ($row=$result->fetch_assoc()){
-            
+            $comid=$row['commentid'];
             $starNo = $row['rating'];
             $stars="";
             for ($x=0; $x<$starNo;$x++){
@@ -30,7 +30,7 @@
             echo "<div>";
             if ($_SESSION['loggedIn']==true){
                 if ($_SESSION['userName']==$row['username']){
-                    echo "<a>Delete</a>";
+                    echo "<a id='delBut' href='deletecom.php?del=$comid'>Delete</a>";
                 }
             }
             echo "<p>".$com."</p>";
