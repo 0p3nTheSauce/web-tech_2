@@ -85,7 +85,7 @@ $report = $_SESSION["report"];
 <h1><?php echo  $nameAdmin;?> is signed in as <?php echo  $usertype;?> </h1>
 </section> 
 
-<div class="two_column"> 
+<div class="two_column">
 <!--column 1-->
 
   <section class="form-box">
@@ -145,11 +145,12 @@ $report = $_SESSION["report"];
           </section><!--input-group-->
       </form>
   </section>
+  </div> 
 
 
 
 
-</div>
+
 
 
 

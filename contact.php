@@ -52,7 +52,7 @@ if (!isset($_SESSION["loggedIn"])) {
                   </section>
               </form>
             </section><!--col sections-->
-            <section id="contactDetails" class="col">
+            <section id="contactDetails" class="col" class="clearfix">
                 <h3>Our info</h3>
                 <!--definition list used for contact details -->
                 <p>Contact us to set up a meeting</p>
