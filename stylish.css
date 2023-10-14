@@ -170,6 +170,21 @@ h4 {
 .form-box{
     
     border-radius: 50px;
+    width:40%;
+    background-color:#fff;
+    padding: calc(20px + 1.5625vw);
+    margin-left:30%;
+    margin-top:5%;
+    text-align:center;
+
+    /* width:40%;
+    display:block;
+    float:left;
+    margin:5%; */
+}
+.form-box-playground{
+    
+    border-radius: 50px;
     /*width:40%;*/
     background-color:#fff;
     padding: calc(20px + 1.5625vw);
@@ -182,6 +197,7 @@ h4 {
     float:left;
     margin:5%;
 }
+
 
 .input-field{
     display:inline-block;
@@ -276,11 +292,20 @@ h4 {
     border:1px solid powderblue;
 }
 */
+
+#successfulMsg{
+    color:rgb(108, 214, 108);
+}
 #contactForm input{
     height:4vh;
     padding:2vh;
     width:75%;
     border:none;
+}
+#emailNeeds{
+    display:none;
+    background:white;
+    color:red;
 }
 #contactForm textarea{
     width:75%;
@@ -326,6 +351,11 @@ h4 {
         float:left;
         height:80vw; 
     }
+}
+
+.contactFormErrorMsg{
+    color:orange;
+    font-size: large;
 }
 
 #degrade{

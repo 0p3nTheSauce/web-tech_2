@@ -46,6 +46,19 @@ if (!isset($_SESSION["emailErrUser"])){
 if (!isset($_SESSION["report"])){
   $_SESSION["report"] = "";                       // set report 
 }
+if (!isset($_SESSION["reportSearch"])){
+  $_SESSION["reportSearch"] = "";                       // set search report s 
+}
+if (!isset($_SESSION["targetUserName"])) { //when an admin is searching for another user
+  $_SESSION["targetUserName"] = "";
+}
+if (!isset($_SESSION["nameErr"])) {
+  $_SESSION["nameErr"] = "";
+}
+if (!isset($_SESSION["usersExist"])) {
+  $_SESSION["usersExist"] = "";
+}
+
 //Admin credentials
 $nameAdmin = $_SESSION["userName"];
 $passwordU = $_SESSION["passwordU"];
@@ -54,10 +67,27 @@ $passwordErrAdmin = $_SESSION["passwordErrAdmin"];
 //user credentials
 $emailUser = $_SESSION["emailUser"];
 $emailErrUser = $_SESSION["emailErrUser"];
+$nameUser = $_SESSION["targetUserName"];
+$nameErr = $_SESSION["nameErr"];
 
 //report
 $report = $_SESSION["report"];
+$reportSearch = $_SESSION["reportSearch"];
+$usersExist = $_SESSION["usersExist"];
 
+//arrays
+if (!isset($_SESSION["userEmails"])) {
+  $_SESSION["userEmails"] = array("Emails");
+}
+if (!isset($_SESSION["userNames"])) {
+  $_SESSION["userNames"] = array("Names");
+}
+if (!isset($_SESSION["userAdmins"])) {
+  $_SESSION["userAdmins"] = array("Admins");
+}
+$userEmails = $_SESSION["userEmails"];
+$userNames = $_SESSION["userNames"];
+$userAdmins = $_SESSION["userAdmins"];
 ?>
 
 <!DOCTYPE html>
@@ -88,12 +118,13 @@ $report = $_SESSION["report"];
 <div class="two_column">
 <!--column 1-->
 
-  <section class="form-box">
+  <section class="form-box-playground">               <!--Deleting accounts window-->
     <h1>Delete accounts</h1>
       <p><span class="errors">* required field</span></p>
       <form method="post" action="deleteAccountAdmin.php" onsubmit="return confirmSubmissionDeleteAdmin()"> 
       <?php if ($report != ""){
         echo "<script>alert('", $report, "')</script>";
+        $report = ""; //only alert us once please
       }?>
           <section class="input-group">
               <p>Enter the user's email address</p>
@@ -118,34 +149,56 @@ $report = $_SESSION["report"];
 
 <!--column 2-->
 
-  <section class="form-box">
-    <h1>Delete accounts</h1>
+  <section class="form-box-playground">       <!--Search accounts window-->
+    <h1>Search accounts</h1>
       <p><span class="errors">* required field</span></p>
-      <form method="post" action="deleteAccountAdmin.php" onsubmit="return confirmSubmissionDeleteAdmin()"> 
-      <?php if ($report != ""){
-        echo "<script>alert('", $report, "')</script>";
-      }?>
+      <form method="post" action="searchUsers.php" > 
           <section class="input-group">
-              <p>Enter the user's email address</p>
+
+              <p>Enter the user's username</p>
               <section class="input-field">
-                  <i class="material-symbols-outlined">mail</i>
-                  <input type="email" placeholder="Email" id="email" name="emailUser" value="<?php echo $emailUser;?>">
+                  <i class="material-symbols-outlined">person</i>
+                  <input type="text" placeholder="Name" id="name" name="nameUser" value="<?php echo $nameUser;?>">
               </section>
-              <span class="errors">* <?php echo $emailErrUser?></span>
+              <span class="errors"> <?php echo $nameErr?></span>
+
               <p>Enter your admin password</p>
               <section class="input-field">
                   <i class="material-symbols-outlined">lock</i>
                   <input type="password" placeholder="Password" id="password1" name="passwordU" value="<?php echo $passwordU;?>">
               </section>
               <span class="errors">* <?php echo $passwordErrAdmin?></span>
+
               <section class="btn-field">
-              <button type = "submit" id="register_btn" class="submission">Delete</button>
+              <button type = "submit" id="register_btn" class="submission">Search</button>
               <!--<a id="login" href="signin.php">Login</a> -->
               </section>
           </section><!--input-group-->
       </form>
   </section>
   </div> 
+
+<?php 
+echo "<h1>", $reportSearch, "</h1>";
+if ($usersExist) {
+  echo '
+    <table>
+      <tr>
+        <th> ', $userNames[0] ,'</th>
+        <th> ', $userEmails[0] ,'</th>
+        <th> ', $userAdmins[0] ,'</th>
+      </tr>';
+  for ($i = 1; $i < count($userNames); $i++) {
+    echo '
+      <tr>
+        <td>', $userNames[$i], '</td>
+        <td>', $userEmails[$i], '</td>
+        <td>', $userAdmins[$i], '</td>
+      </tr>';
+  }
+  echo '</table>';
+}
+?>
 
 
 

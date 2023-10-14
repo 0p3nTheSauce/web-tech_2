@@ -84,7 +84,7 @@ if ($passwordOK) {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     } else {
-        // $passwordErr = "Incorrect password";
+        $passwordErr = "Incorrect password";
     }
     $conn->close();
 }   

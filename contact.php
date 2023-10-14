@@ -1,7 +1,8 @@
 <?php 
 //Start the session 
-session_start();
+//session_start();
 //Set session variables 
+include 'contactFormValidation.php';
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
     
@@ -26,33 +27,69 @@ if (!isset($_SESSION["loggedIn"])) {
         <h2>Contact the Grahamstown Grub Stop
         </h2>
             <section class="col">
+              <?php 
+                $emailError=$nameError=$phoneError=$msgError='';
+                $formdata=$oldname=$oldno=$oldem=$oldmsg='';
+
+                if (isset($_GET['msgsent'])){
+                    if ($_GET['msgsent']==true){
+                        echo "<p id='successfulMsg'><span>&#9989;</span> Your message was received. You will hear from us soon.</p>";
+                    }
+                }
+                else{
+                    //$formdata=[$fname, $pnum, $em, $msg];
+                    if (isset($_SESSION['fdata'])){
+                        $formdata = $_SESSION['fdata'];
+                        $oldname = $formdata[0];
+                        $oldno=$formdata[1];
+                        $oldem=$formdata[2];
+                        $oldmsg =$formdata[3];
+                        
+                    }
+                    if (isset($_GET['emailError'])){
+                        $emailError = $_GET['emailError'];
+                    }
+                    if (isset($_GET['nameError'])){
+                        $nameError = $_GET['nameError'];
+                    }
+                    if (isset($_GET['phoneError'])){
+                        $phoneError = $_GET['phoneError'];
+                    }
+                    if (isset($_GET['msgError'])){
+                        $msgError = $_GET['msgError'];
+                    }
+                }
+                
+              ?>
               <form id="contactForm" method="post" action="contactFormValidation.php">
                   <h3>Get in touch</h3>
                   <p>Leave us a message and we will respond to your question or comment</p>
                   <p id="reqFieldErrorMsg"></p>
                   <section class="inputgroup">
-                      <p id="nameIssue"></p>
+                      <p class='contactFormErrorMsg'><?php echo $nameError;?></p>
                       <label for="fname">Name</label><br>
-                      <input type="text" id="fname" name="fname" class="requiredField"><br>
+                      <input type="text" id="fname" name="fname" class="requiredField" value='<?php echo $oldname; ?>'><br>
                   </section>
                   <section class="inputgroup">
-                    <p id="phoneIssue"></p>
+                    <p class='contactFormErrorMsg'><?php echo $phoneError;?></p>
                       <label for="pnum">Phone number</label><br>
-                      <input type="text" id="pnum" name="pnum" class="requiredField"><br>
+                      <input type="text" id="pnum" name="pnum" class="requiredField" value='<?php echo $oldno; ?>' placeholder="+27"><br>
                   </section>
                   <section class="inputgroup">
-                    <p id="emailIssue"></p>
+                    <p class='contactFormErrorMsg'><?php echo $emailError;?></p>
                       <label for="em">Email</label><br>
-                      <input type="text" id="em" name="em" class="requiredField"><br>
+                      <div id='emailNeeds'>An email requires an '@',<br>some letters<br>,and a period.</div>
+                      <input type="text" id="em" name="em" class="requiredField" value='<?php echo $oldem; ?>'><br>
                   </section>
                   <section class="inputgroup">
+                    <p class='contactFormErrorMsg'><?php echo $msgError;?></p>
                       <label for="msg">Message</label><br>
-                      <textarea id="msg" name="msg"  rows="10" class="requiredField"></textarea><br>
+                      <textarea id="msg" name="msg"  rows="10" class="requiredField" value='<?php echo $oldno; ?>'></textarea><br>
                       <button type="submit">Send</button>  
                   </section>
               </form>
             </section><!--col sections-->
-            <section id="contactDetails" class="col" class="clearfix">
+            <section id="contactDetails" class="col" >
                 <h3>Our info</h3>
                 <!--definition list used for contact details -->
                 <p>Contact us to set up a meeting</p>

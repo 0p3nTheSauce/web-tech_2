@@ -32,6 +32,7 @@ if (!isset($_SESSION["loggedIn"])) {
 
       <section id="slider-frame"> 
         <section id="slider-images"> 
+          
           <section class="image-container active">
             <img id="Barista" src="Media/barista.jpg" onclick="descibeImage(this.id)">
             <div class="text">Barista</div>
@@ -77,20 +78,8 @@ if (!isset($_SESSION["loggedIn"])) {
             <div class="text">Ginos</div>
           </section>
           <?php
-          /*
-          //extract all uploaded file's to display
-          $files = glob('uploadedMedia/*');
-          //loop through array for every file
-          foreach($files as $file){
-            $file_name = basename($files);
-            $file_source = "uploadedMedia\\";
-            $file_full = $file_source . $file_name;
-            //adding uplaod files to image carousel
-            echo "<section class='image-container'>";
-            echo "<img src=" . $file_full . ">";
-            echo "<div class='text'>$file_name</div>";
-            echo "</section>";
-          } */
+          
+
           ?>
         </section>
       </section>
