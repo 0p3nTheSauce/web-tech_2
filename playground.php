@@ -124,7 +124,7 @@ $userAdmins = $_SESSION["userAdmins"];
       <form method="post" action="deleteAccountAdmin.php" onsubmit="return confirmSubmissionDeleteAdmin()"> 
       <?php if ($report != ""){
         echo "<script>alert('", $report, "')</script>";
-        $report = ""; //only alert us once please
+        $_SESSION["report"] = ""; //only alert us once please
       }?>
           <section class="input-group">
               <p>Enter the user's email address</p>

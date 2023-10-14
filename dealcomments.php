@@ -14,7 +14,10 @@
     
     //Gets comments for specified restuarant with star rating
     function getComments($conn, $clicked_id){
-        $userN = $_SESSION['userName'];
+        $userN='';
+        if (isset($_SESSION['userName'])){
+            $userN = $_SESSION['userName'];
+        }
         $sql = "SELECT * FROM reviews WHERE resid = $clicked_id ORDER BY commentdate DESC";
         $result = $conn->query($sql);
         while ($row=$result->fetch_assoc()){

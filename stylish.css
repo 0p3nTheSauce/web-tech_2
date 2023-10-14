@@ -306,6 +306,12 @@ h4 {
     display:none;
     background:white;
     color:red;
+    font-size:medium;
+    width:75%;
+    text-align:center;
+}
+#emailneeds ul{
+    list-style-type: none;
 }
 #contactForm textarea{
     width:75%;

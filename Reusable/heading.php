@@ -58,7 +58,7 @@ echo
         if ($_SESSION["isAdmin"]) { // only admins can view
           echo '<li class="simplenavlink">
           <div class="hiddenLinks">
-            <a href="playground.php">Delete accounts</a>
+            <a href="playground.php">Account manager</a>
           </div>
           </li>';
         }

@@ -51,7 +51,13 @@ if ($_SESSION["isAdmin"]) {
 
 <section class="outer-form-container"> <!--Logout -->
     <section class="form-box">
-        <h1 id="form_title"><?php echo $_SESSION["userName"];?> Is logged in as <?php echo $usertype;?></h1>
+        <?php 
+            if ($_SESSION["loggedIn"]){
+                echo '<h1 id="form_title">', $_SESSION["userName"], 'Is logged in as',  $usertype;
+            } else {
+                header('Location: signin.php');
+            }
+        ?>
         <form method="post" action="signOut.php" onsubmit="return confirmSubmissionLogout()" > 
             <section class="input-group">
                 <section class="btn-field"> 

@@ -31,57 +31,49 @@ if (!isset($_SESSION["loggedIn"])) {
       </div>
 
       <section id="slider-frame"> 
-        <section id="slider-images"> 
-          
+         
+        
+          <?php
+          $servername = "cs3-dev.ict.ru.ac.za";
+          $username = "G19M8152";
+          $password = "G19M8152";
+          $database = "compKing";
+
+          // Create connection
+          $connect = new mysqli($servername, $username, $password,$database);
+      
+          // Check connection
+          if ($connect->connect_error) {
+            die("Connection failed: " . $connect->connect_error);
+          }
+
+          /*Get pictures from database and output to image carousel  */
+          /*
           <section class="image-container active">
             <img id="Barista" src="Media/barista.jpg" onclick="descibeImage(this.id)">
             <div class="text">Barista</div>
           </section>
+          placeholder images for image-->
+*/    
+          $arr_images = array("images");
 
-          <section class="image-container">
-            <img src="Media\Major Frazors.jpeg">
-            <div class="text">Majo Frazors</div>
-          </section>
+          //SELECT all images from database
+          $result = $connect->query("SELECT image FROM images ORDER BY imageid DESC");
+          if($result){
+            
+            while($row = $result->fetch_assoc()){
 
-          <section class="image-container">
-            <img src="Media\Fork&Dagger.jpg">
-            <div class="text">Fork</div>
-          </section>
-
-          <section class="image-container">
-            <img src="Media\revelations.jpg">
-            <div class="text">revelations</div>
-          </section>
-
-          <section class="image-container">
-            <img src="Media\pothole_and_donkey.jpg">
-            <div class="text">Pothole and Donkey</div>
-          </section>
-
-          <section class="image-container">
-            <img src="Media\panda.jpg">
-            <div class="text">Panda</div>
-          </section>
-
-          <section class="image-container">
-            <img src="Media\theatre cafe.jpg">
-            <div class="text">Theatre Cafe</div>
-          </section>
-
-          <section class="image-container">
-            <img src="Media\house_of_curry.jpg">
-            <div class="text">House of Curry</div>
-          </section>
-
-          <section class="image-container">
-            <img src="Media\ginos.jpg">
-            <div class="text">Ginos</div>
-          </section>
-          <?php
-          
-
+              echo "<section id='slider-images'>";
+                echo "<section class='image-container'>";
+                  echo "<img src='data:image/jpg;charset=utf8;base64,", base64_encode($row['image']), "/>";
+                  echo "<div class='text'>TEXT</div>";
+                echo "</section>";
+              echo "</section>";
+            }} else{
+              echo "<p class='status error'>Image(s) not found...</p>";
+            }
           ?>
-        </section>
+        
       </section>
 
       <br>

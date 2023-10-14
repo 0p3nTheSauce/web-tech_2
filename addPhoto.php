@@ -71,7 +71,7 @@ if ($uploadOk == 0) {
   //Insert image into table 
   $sql = "INSERT INTO images (resid,image,created)
           VALUES ('12','$imgContent',NOW())";
-  */
+  
   if ($conn->query($sql) === TRUE){
     echo "The file ". htmlspecialchars( basename( $_FILES["file_upload"]["name"])). " has been uploaded.";
     echo "Entered successfully";

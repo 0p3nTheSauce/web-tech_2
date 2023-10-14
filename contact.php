@@ -78,7 +78,7 @@ if (!isset($_SESSION["loggedIn"])) {
                   <section class="inputgroup">
                     <p class='contactFormErrorMsg'><?php echo $emailError;?></p>
                       <label for="em">Email</label><br>
-                      <div id='emailNeeds'>An email requires an '@',<br>some letters<br>,and a period.</div>
+                      <ul id='emailNeeds'><li id='i'>An email requires letters</li><li id='ii'>an '@'</li><li id='iii'>some letters</li><li id='iv'>a period</li><li id='v'>some more letters</li></ul></div>
                       <input type="text" id="em" name="em" class="requiredField" value='<?php echo $oldem; ?>'><br>
                   </section>
                   <section class="inputgroup">

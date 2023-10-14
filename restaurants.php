@@ -1,3 +1,12 @@
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,15 +25,7 @@
     <?php include 'calculateAverageRating.php';?>
         <h2>Independent restaurants of Grahamstown</h2>
         <a id="top"></a>
-<?php 
-//Start the session 
-session_start();
-//Set session variables 
-if (!isset($_SESSION["loggedIn"])) {
-    $_SESSION["loggedIn"] = false;
-    
-}
-?>
+
 <?php  
 echo "<section id='tablewrapper'>";  
     global $conn;

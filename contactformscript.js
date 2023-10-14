@@ -19,21 +19,6 @@ reactToMouseOver(phone_field);
 reactToMouseOver(email_field);
 reactToMouseOver(message_field);
 
-//input validation
-//check all fields are filled out
-let requiredField = document.getElementsByClassName("requiredField");
-let reqFieldErrorMsg = document.getElementById("reqFieldErrorMsg");
-let contactForm = document.getElementById("contactForm");
-
-//report specific issues
-let nameIssue = document.getElementById("nameIssue");
-let phoneIssue = document.getElementById("phoneIssue");
-let emailIssue = document.getElementById("emailIssue");
-let isSuccess = true;
-let contactDetails = document.getElementById("contactDetails");
-let thankMes = document.getElementById("thanks");
-let isSliding = false;
-
 //show email requirements
 email_field.onfocus=function(){
     emailRequirements.style.display="block";
@@ -41,6 +26,53 @@ email_field.onfocus=function(){
 email_field.onblur=function(){
     emailRequirements.style.display="none";
 }
+//<ul id='emailNeeds'><li id='i'>An email requires letters</li><li id='ii'>an '@'</li><li id='iii'>some letters</li><li id='iv'>a period</li><li id='v'>some more letters</li></ul></div>
+let letters= /[a-z]/g;
+let at= /@/g;
+let someMoreLetters = /@[a-z]/g;
+let period=/\./g;
+let evenMoreLetters=/\.[a-z]/g;
+let i=document.getElementById("i");
+let ii=document.getElementById("ii");
+let iii=document.getElementById("iii");
+let iv=document.getElementById("iv");
+let v=document.getElementById("v");
+email_field.onkeyup=function(){
+    if (email_field.value.match(letters)){
+        i.style.color="green";
+    }
+    else{
+        i.style.color="red";
+    }
+    if (email_field.value.match(at)){
+        ii.style.color="green";
+    }
+    else{
+        ii.style.color="red";
+    }
+    if (email_field.value.match(someMoreLetters)){
+        iii.style.color="green";
+    }
+    else{
+        iii.style.color="red";
+    }
+    if (email_field.value.match(period)){
+        iv.style.color="green";
+    }
+    else{
+        iv.style.color="red";
+    }
+    if (email_field.value.match(evenMoreLetters)){
+        v.style.color="green";
+    }
+    else{
+        v.style.color="red";
+    }
+    
+}
+
+
+
 
 
 
