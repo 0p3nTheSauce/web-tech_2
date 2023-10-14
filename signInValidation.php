@@ -100,7 +100,9 @@ if ($emailOK && $passwordOK) { //                          logging in
             $loginSuccessful = false;
             $passwordErr = "Incorrect password";
         }      
-    } 
+    } else {
+        $emailErr = "There is no account with that email address. Consider registering";
+    }
     $conn->close();
 } 
 $_SESSION["emailErr"] = $emailErr;

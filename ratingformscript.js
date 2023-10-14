@@ -52,3 +52,47 @@ radio5.onclick=function(){
     check(star5);
 }
 
+//color the stars already checked from previous 
+/*
+if (radio1.checked==true){
+    console.log(star1);
+    check(star1);
+    uncheck(star2);
+    uncheck(star3);
+    uncheck(star4);
+    uncheck(star5);
+}
+if (radio2.checked==true){
+    console.log(star2);
+    check(star1);
+    check(star2);
+    uncheck(star3);
+    uncheck(star4);
+    uncheck(star5);
+}
+if (radio3.checked==true){
+    console.log(star3);
+    check(star1);
+    check(star2);
+    check(star3);
+    uncheck(star4);
+    uncheck(star5);
+}
+if (radio4.checked==true){
+    console.log(star4);
+    check(star1);
+    check(star2);
+    check(star3);
+    check(star4);
+    uncheck(star5);
+}
+if (radio5.checked==true){
+    console.log(star5);
+    check(star1);
+    check(star2);
+    check(star3);
+    check(star4);
+    check(star5);
+}
+*/
+

@@ -10,11 +10,11 @@ $_SESSION["passwordErr"] = "";
 $_SESSION["repPassword"] ="";
 $_SESSION["repPasswordErr"] ="";
 $_SESSION["email"] = "";
-$_SESSION["emailErr"] = "";
+$_SESSION["emailErrSignup"] = "";
 
 $createdSuccessfully = false;
 $nameOK = $emailOK = $passwordOK = $repPasswordOK = true;
-$nameErr = $emailErr = $passwordErr = $repPasswordErr = "";
+$nameErr = $emailErrSignup = $passwordErr = $repPasswordErr = "";
 $name = $email = $passwordU = $repPassword = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // validation of user input
     if (empty($_POST["name"])) {
@@ -33,17 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // validation of user input
         }
     }
     if (empty($_POST["email"])) {
-        $emailErr = "Email is required";
+        $emailErrSignup = "Email is required";
         $emailOK = false;
     } else {
         $email = clean_input($_POST["email"]);
         // check if e-mail address is well-formed
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailErr = "Invalid email format";
+            $emailErrSignup = "Invalid email format";
             $emailOK = false;
         }
         if (strlen($email) > 50) {
-            $emailErr = "Email is too long";
+            $emailErrSignup = "Email is too long";
             $emailOK = false;
         }
     }
@@ -113,9 +113,13 @@ if ($nameOK && $emailOK && $passwordOK && $repPasswordOK ) {
         $isAdmin = $row['IsAdmin'];
         $userPassword = $row['UserPassword'];
         if ($userEmail == $email) {
-            echo "There already exists an account with that email.";
+            // echo ;
+            $emailErrSignup = "There already exists an account with that email. If this is you, log in instead";
             $userExists = true;
             break;
+        } else if ($userName == $name) {
+            $userExists = true;
+            $nameErr = "That username is already taken. If this is you, log in instead, otherwise use a different username";
         }
     }
     if (!$userExists) { //sign up successful 
@@ -141,7 +145,7 @@ $_SESSION["passwordErr"] = $passwordErr;
 $_SESSION["repPassword"] =$repPassword;
 $_SESSION["repPasswordErr"] =$repPasswordErr;
 $_SESSION["email"] = $email;
-$_SESSION["emailErr"] = $emailErr;
+$_SESSION["emailErrSignup"] = $emailErrSignup;
 
 if ($createdSuccessfully) {
     header('Location: loggedIn.php');

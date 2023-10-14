@@ -20,17 +20,12 @@ if (!isset($_SESSION["loggedIn"])) {
   <script defer src="gallery.js"></script>
     <title>Grahamstown Grub Stop</title>
   </head>
-  <body onload="getImageCount();"> <!-- onload function to initialise-->
+  <body onload="getImageCount()">
   <?php include 'Reusable\heading.php';
         include 'addPhoto.php';
-        
-        error_reporting(E_ERROR | E_PARSE);
   ?><!--heading-->
-  <h2>Gallery</h2>
     <div class="slider_box">
-      <?php
-      error_reporting(E_ERROR | E_PARSE);
-      ?>
+
       <div class="slider_controls">
         <button class="prev">&laquo</button>
       </div>
@@ -49,7 +44,7 @@ if (!isset($_SESSION["loggedIn"])) {
 
           <section class="image-container">
             <img src="Media\Fork&Dagger.jpg">
-            <div class="text">Fork&Dagger</div>
+            <div class="text">Fork</div>
           </section>
 
           <section class="image-container">
@@ -82,14 +77,6 @@ if (!isset($_SESSION["loggedIn"])) {
             <div class="text">Ginos</div>
           </section>
           <?php
-          
-            /*
-          $files = glob('uploadedMedia/*');
-          foreach($files as $file){
-            $file_name = $files['basename'];
-            echo "<p>" . $file_name . "</p>";
-          }
-          */
           /*
           //extract all uploaded file's to display
           $files = glob('uploadedMedia/*');
@@ -112,40 +99,29 @@ if (!isset($_SESSION["loggedIn"])) {
       <div class="slider_controls">
         <button class="next">&raquo</button>
       </div>
-        <div class="slider_info">
-          <p id="imageCount" ></p>
-          <br>
-          <p id="lastModified"></p>
-        </div>
+      <p id="imageCount" ></p>
+      <br>
+      <p id="lastModified"></p>
+      <br>
+      <p id="describer">3</p>
+     
     </div>
     <?php
-    //upload section for admins ONLY!!
-    if($_SESSION['isAdmin'] == true){
+    // working php for upload function
+    //echo "<p>" . $_SESSION['IsAdmin'] . "</p>"
+    
+    //if($_SESSION['IsAdmin'] == true){
       //developer button to upload files
         error_reporting(E_ERROR | E_PARSE);
         echo "<div id='admin_upload'>";
         echo "<p id='admin_photo_heading'>Admins add photos here</p>";
         echo "<form method='POST' action='addphoto.php' enctype='multipart/form-data'>";
         echo "    <input type='file' name='file_upload' />";
-        echo "    <input type='submit' value='Upload' name='img_submit' ";
+        echo "    <input type='submit' value='Upload' name='img_submit'>";
         echo "</form>";
-    }
-
-        /*
-        $folder = 'uploadedMedia/'; //directory or folder to loop through
-          $checkFiles = scandir($folder); //scan folder content
-          $fileCount = count($checkFiles); //count number of files in the directory
-          $i = 0; //set for iteration;
-          while($i < $fileCount){
-              $file = $checkFiles[$i]; //each file is stored in an array ... 
-                if($file = '.' || $file = '..'){
-                  //echo nothing
-                }else{
-                  echo "<p>". $file ."</p>"; // file names are printed out
-                }
-            }
-        echo "</div>"; */
-     
+        echo "</div>";
+    //} 
+    
     ?>
       
     <?php include 'Reusable\footer.php';?><!--footer-->

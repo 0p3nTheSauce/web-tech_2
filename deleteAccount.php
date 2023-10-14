@@ -3,14 +3,16 @@
 session_start();
 $deletedSuccessfully = false;
 $email = $_SESSION["email"];
+$emailErr = $passwordErr = "";
 $passwordU = "";
-$passwordErr = "";
 $passwordOK = true;
+// check if delete account button has been activated
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["passwordU"])) {
         $passwordErr = "Password is required";
         $passwordOK = false;
     } else {
+        //password rules checker
         $passwordU = clean_input($_POST["passwordU"]);
         if (strlen($passwordU) < 8) {
             $passwordErr = "Password too short";
@@ -33,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+//input sanitization
 function clean_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -61,19 +65,21 @@ if ($passwordOK) {
             $row = $result->fetch_assoc();
             $passwordFromDatabase = $row['UserPassword'];
         } else {
-            echo "No results found for the given email.";
+            $emailErr =  "No results found for the given email.";
         }
     } else {
         echo "Query failed: " . $conn->error;
     }
-    
-    if ($passwordFromDatabase == $passwordU) {
+    $verified = password_verify($passwordU, $passwordFromDatabase);  // check User password
+    //passwords are hashed when placed in the database
+    if ($verified) {
         $sql = "DELETE FROM users WHERE UserEmail = '$email'";
         if ($conn->query($sql) === TRUE) {
             $deletedSuccessfully = true;
             //Unset session variables 
             session_unset();
             $_SESSION["loggedIn"] = false;
+            $_SESSION["IsAdmin"] = false;
         }else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -81,9 +87,12 @@ if ($passwordOK) {
         // $passwordErr = "Incorrect password";
     }
     $conn->close();
-}  
-$_SESSION["passwordU"] = $passwordU;
+}   
+if ($_SESSION["loggedIn"]) { // make the password go away once user has deleted their account
+    $_SESSION["passwordU"] = $passwordU;
+}
 $_SESSION["passwordErr"] = $passwordErr;
+$_SESSION["emailErr"] = $emailErr;
 if ($deletedSuccessfully) {
     header('Location: signup.php');
 } else {

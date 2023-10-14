@@ -34,7 +34,7 @@ if (!isset($_SESSION["loggedIn"])) {
         <section id="tablewrapper">
             <table id="restaurantTable">
                 <tr class="restaurantRow">
-                    <td class="restaurantbloc">
+                <td class="restaurantbloc">
                         <section class="restaurantSection" >
                             <h3>
                             Major Frazors

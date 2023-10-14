@@ -51,22 +51,37 @@ password1.onkeyup=function(){
     if (password1.value.match(lowercaseLetters)){
         lowerletter.style.color="green";
         isValidPassword[0]=true;
+    } else {
+        lowerletter.style.color="red";
+        isValidPassword[0]=false;
     }
     if(password1.value.match(uppercaseLetters)){
         upperletter.style.color="green";
         isValidPassword[1]=true;
+    } else {
+        upperletter.style.color="red";
+        isValidPassword[1]=false;
     }
     if(password1.value.match(numbers)){
         number.style.color="green";
         isValidPassword[2]=true;
+    } else {
+        number.style.color="red";
+        isValidPassword[2]=false;
     }
     if (password1.value.match(specials)){
         specialcharacter.style.color="green";
         isValidPassword[3]=true;
+    } else {
+        specialcharacter.style.color="red";
+        isValidPassword[3]=false;
     }
     if(password1.value.length>=8){
         len.style.color="green";
         isValidPassword[4]=true;
+    } else {
+        len.style.color="red";
+        isValidPassword[4]=false;
     }
 }
 

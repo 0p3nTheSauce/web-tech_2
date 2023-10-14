@@ -5,11 +5,11 @@ session_start();
 
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
-    echo '<p> User is not logged in</p>';
+    // echo '<p> User is not logged in</p>';
 } else if ($_SESSION["loggedIn"]) {
-    echo $_SESSION["userName"], "<p> Is logged in</p>";
+    // echo $_SESSION["userName"], "<p> Is logged in</p>";
 } else {
-    echo '<p> User is not logged in</p>';
+    // echo '<p> User is not logged in</p>';
 }
 
 if (!isset($_SESSION["userName"])){
@@ -33,8 +33,8 @@ if (!isset($_SESSION["repPasswordErr"])){
 if (!isset( $_SESSION["email"])){
     $_SESSION["email"] = "";
 }
-if (!isset($_SESSION["emailErr"])){
-    $_SESSION["emailErr"] = "";
+if (!isset($_SESSION["emailErrSignup"])){
+    $_SESSION["emailErrSignup"] = "";
 }
 $name = $_SESSION["userName"];
 $nameErr = $_SESSION["nameErr"];
@@ -43,7 +43,7 @@ $passwordErr = $_SESSION["passwordErr"];
 $repPassword = $_SESSION["repPassword"];
 $repPasswordErr = $_SESSION["repPasswordErr"];
 $email = $_SESSION["email"];
-$emailErr = $_SESSION["emailErr"];
+$emailErrSignup = $_SESSION["emailErrSignup"];
 
 ?>
 
@@ -86,7 +86,7 @@ $emailErr = $_SESSION["emailErr"];
                     <i class="material-symbols-outlined">mail</i>
                     <input type="email" placeholder="Email" id="email" name="email" value="<?php echo $email;?>">
                 </section>
-                <span class="errors">* <?php echo $emailErr?></span>
+                <span class="errors">* <?php echo $emailErrSignup?></span>
                 <section id ="pw">
                     <p>Password requirements</p>
                     <ul>

@@ -8,6 +8,6 @@
     <a href="http:///www.instagram.com" class="fa fa-instagram"></a>
     <p id="creators">Created by Litha Mabona, Luke Goodall, Caron Rademan</p>
     <p> email us at <a href="mailto:grahamstowngrubstop@gmail.com">grahamstowngrubstop@gmail.com</a></p>
-    <button><a href="#topOfPage" id="topOfPage">&uarr; Back to top</a></button>
+    <button><a href="#top">&uarr; Back to top</a></button>
   </footer>';
 ?>

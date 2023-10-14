@@ -140,6 +140,26 @@ h4 {
     font-family: Georgia, serif;
 }
 
+
+/*login info box*/
+.login_information {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    background-color:#fff;
+    border-radius: 50px;
+    width:40%;
+    padding: calc(20px + 1.5625vw);
+    margin-left:30%;
+    margin-top:5%;
+}
+.login_information h1{
+    font-size:3vh;
+}
+
+
+
+
 /*styles related to the login and register form*/
 .outer-form-container{
     width:100%;
@@ -554,7 +574,13 @@ table{
     font-size:20px;
     
 }
-
+/*
+#editcom p{
+    display:block;
+    background-color:white;
+    color:red;
+    text-align: center;
+}*/
 .restaurantReviewForm{
     background-color:white;
     width:90%;

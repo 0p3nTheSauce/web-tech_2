@@ -1,13 +1,3 @@
-<?php 
-//Start the session 
-session_start();
-//Set session variables 
-if (!isset($_SESSION["loggedIn"])) {
-    $_SESSION["loggedIn"] = false;
-    
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,268 +15,77 @@ if (!isset($_SESSION["loggedIn"])) {
     <?php include 'Reusable\heading.php';?><!--heading-->
     <?php include 'calculateAverageRating.php';?>
         <h2>Independent restaurants of Grahamstown</h2>
-                <!--image dimensions width="300" height="200"-->
-                <!--style of restaurant sections:-->
-                <!--"background-color: #44ece3;
-                    padding-left: 10px;
-                    padding-right: 10px;
-                    display: inline-block;"-->
-        <section id="tablewrapper">
-            <table id="restaurantTable">
-                <tr class="restaurantRow">
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection" >
-                            <h3>
-                            Major Frazors
-                            </h3>
-                            <a href="https://oppositethearch.co.za" target="_blank">
-                            <img src="Media\Major Frazors.jpeg" alt="www.oppositethearch.co.za" class="restaurantimg">
-                            </a>
-                            <p>Restaurant & Bar<br>
-                            38 Somerset St
-                            <a href="mailto:eat@majorfrasers.co.za">email</a><br>
-                            <a href="tel:0460040006">0460040006</a><br>
-                            Hours: 11am-10pm
-                            </p>
-                        <section class="general_stars" id="frazer_stars">
-                            <p><a href="ratingform.php?restaurant=1" class="linkToPop">Review</a></p>
-                            <?php doStars(1); ?>
-                            
-                        </section>
-                        </section>
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            Rat & Parrot
-                            </h3>
-                            <a href="https://ratandparrot.co.za/" target="_blank">
-                            <img src="https://media-cdn.tripadvisor.com/media/photo-s/11/a7/75/0b/the-rat-parrot-welcome.jpg" alt="Rat and Parrot facade" class="restaurantimg">
-                            </a> 
-                            <p>Restaurant & Bar<br>
-                            59 New St<br>
-                            <a href="tel:0466225002">0466225002</a><br>
-                            Hours: 11am - 10pm
-                            </p>
-                                <section class="general_stars" id="rat_stars">
-                                <p><a href="ratingform.php?restaurant=2" class="linkToPop">Review</a></p>
-                                <?php doStars(2); ?>
-                            </section>
-                        </section>
-                    </td>
-                    <td class="restaurantbloc">      
-                        <section class="restaurantSection">
-                            <h3>
-                            La Cafe / Provost
-                            </h3>
-                            <a href="https://en.wikipedia.org/wiki/Old_Provost" target="_blank">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/17/The_Old_Provost%2C_Grahamstown.jpg/1024px-The_Old_Provost%2C_Grahamstown.jpg" alt="Old Provost building" class="restaurantimg">
-                            </a> 
-                            <p>Cafe<br>
-                            3236 University Rd<br>
-                            <a href="tel:+27664538811">+27664538811</a><br>
-                            Hours: 8am-5pm
-                            <br>
-                            </p>
-                            <section class="general_stars" id="lacafe_stars">
-                                <p><a href="ratingform.php?restaurant=3" class="linkToPop">Review</a></p>
-                                <?php doStars(3); ?>
-                            </section>
-                        </section>
+        <a id="top"></a>
+<?php 
+//Start the session 
+session_start();
+//Set session variables 
+if (!isset($_SESSION["loggedIn"])) {
+    $_SESSION["loggedIn"] = false;
+    
+}
+?>
+<?php  
+echo "<section id='tablewrapper'>";  
+    global $conn;
+    $i=1;
+    $nql="SELECT COUNT(*) AS rescount FROM restaurants";
+    $result = $conn->query($nql);
+    if($result){
+        $row=$result->fetch_assoc();
+        $numRestaurants= $row['rescount'];
+    }
+    else{
+        echo "erroneous stuff";
+    }
+    $j=1;
+
+    echo "<table id='restaurantTable'>";
+    while ($j<=$numRestaurants){
+        if ($j%4==1){
+            echo "<tr class='restaurantRow'>";
+        }
+        echo "<td class='restaurantbloc'>";
+        echo "<section class='restaurantSection'>"; 
                 
-                    </td>
-                    <td class="restaurantbloc">      
-                        <section class="restaurantSection">
-                            <h3>
-                            Red Cafe
-                            </h3>
-                            <a href="https://www.facebook.com/redcafemakhanda/" target="_blank">
-                            <img src="https://www.wininganddining.co.za/gallery/5384-19980-gallery.jpg" alt="Red Cafe entrance" class="restaurantimg">
-                            </a> 
-                            <p>Cafe<br>
-                            127 High St<br>
-                            <a href="tel:466228384">466228384</a><br>
-                            Hours: 8am-4:45pm
-                            <br>
-                            </p>
-                            <section class="general_stars" id="redcafe_stars">
-                                <p><a href="ratingform.php?restaurant=4" class="linkToPop">Review</a></p>
-                                <?php doStars(4); ?>
-                            </section>
-                        </section>
-                    </td>
-                </tr>
-                <tr class="restaurantRow">
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            Pothole & Donkey
-                            </h3>
-                            <a href="https://www.facebook.com/potholeanddonkey/" target="_blank">
-                            <img src="Media\pothole_and_donkey.jpg" alt="picture a donkey & pothole" class="restaurantimg">
-                            </a>
-                            <p>Restaurant & Bar<br>
-                            123 High St<br>
-                            <a href="tel:0460040006">0466222324</a><br>
-                            Hours: 7am-10pm<br>
-                            <br>
-                            </p>
-                            <section class="general_stars" id="donkey_stars">
-                                <p><a href="ratingform.php?restaurant=5" class="linkToPop">Review</a></p>
-                                <?php doStars(5); ?>
-                            </section>
-                        </section>  
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            Barista
-                            </h3>
-                            <a href="https://oppositethearch.co.za/the-barista/" target="_blank">
-                            <img src="Media\barista.jpg" alt="www.oppositethearch.co.za" class="restaurantimg">
-                            </a>
-                            <p>Cafe<br>
-                            38 Somerset St<br>
-                            <a href="tel:0460040006">0460040006</a><br>
-                            Hours: 6:30am-4pm<br>
-                            <br>
-                            </p>
-                            <section class="general_stars" id="barista_stars">
-                                <p><a href="ratingform.php?restaurant=6" class="linkToPop">Review</a></p>
-                                <?php doStars(6); ?>
-                            </section>
-                        </section>
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            House of Curry
-                            </h3>
-                            <a href="https://houseofcurrygraham.wixsite.com/restaurant" target="_blank">
-                            <img src="Media\house_of_curry.jpg" alt="Curry house" class="restaurantimg">
-                            </a>
-                            <p>Restaurant<br>
-                            45 New St<br>
-                            <a href="tel:0460040006">27603445913</a><br>
-                            Hours: 8:30am-6pm<br>
-                            <br>
-                            </p>
-                            <section class="general_stars" id="curry_stars">
-                                <p><a href="ratingform.php?restaurant=7" class="linkToPop">Review</a></p>
-                                <?php doStars(7); ?>
-                            </section>
-                        </section>
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection" >
-                            <h3>
-                            Revelations
-                            </h3>
-                            <a href="https://www.facebook.com/RevelationsCoffeeShop/" target="_blank">
-                            <img src="Media\revelations.jpg" alt="restaurant" class="restaurantimg">
-                            </a>
-                            <p>Restaurant & Cafe<br>
-                            22 African St
-                            <a href="mailto:revelations@insightnet.co.za">email</a><br>
-                            <a href="tel:466362433">466362433</a><br>
-                            Hours: 11am-10pm
-                            </p>
-                        <!-- Basic review form to rate the websites (will be expanded on with CSS)-->
-                        <section class="general_stars" id="revelation_stars">
-                            <p><a href="ratingform.php?restaurant=8" class="linkToPop">Review</a></p>
-                            <?php doStars(8); ?>
-                        </section>
-                        </section>
-                    </td>
-                </tr>
-                <tr class="restaurantRow">
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            Panda
-                            </h3>
-                            <a href="https://oppositethearch.co.za" target="_blank">
-                            <img src="Media\panda.jpg" class="restaurantimg">
-                            </a>
-                            <p>Restaurant<br>
-                                112 High St<br>
-                                <a href="https://www.mrdfood.com/food-delivery/restaurant/pandas-asia-kitchen-grahamstown_grahamstown/21103">Online order page</a><br>
-                                <a href="tel:631822227">631822227</a><br>
-                                Hours: 11am-10pm
-                              </p>
-                              <section class="general_stars" id="panda_stars">
-                                <p><a href="ratingform.php?restaurant=9" class="linkToPop">Review</a></p>
-                                <?php doStars(9); ?>
-                            </section>
-                        </section>  
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            Gino's
-                            </h3>
-                            <a href="https://oppositethearch.co.za" target="_blank">
-                            <img src="Media\ginos.jpg" alt="www.oppositethearch.co.za" class="restaurantimg">
-                            </a>
-                            <p>Italian restaurant<br>
-                            Hill St<br>
-                            <a href="mailto:info@hotelvictoria.co.za">info@hotelvictoria.co.za</a><br>
-                            <a href="tel:635425003">635425003</a><br>
-                            Hours: 11am-10pm
-                            </p>
-                            <section class="general_stars" id="gino_stars">
-                                <p><a href="ratingform.php?restaurant=10" class="linkToPop">Review</a></p>
-                                <?php doStars(10); ?>
-                            </section>
-                        </section>  
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection">
-                            <h3>
-                            Fork & Dagger
-                            </h3>
-                            <a href="https://oppositethearch.co.za" target="_blank">
-                                <img src="Media\Fork&Dagger.jpg" alt="www.oppositethearch.co.za" class="restaurantimg">
-                            </a>
-                            <p>49 African St<br>
-                                <a href="office@theforkanddagger.co.za">office@theforkanddagger.co.za</a><br>
-                                <a href="tel:466223112">466223112</a><br>
-                                Hours: 12am-10pm
-                            </p>
-                            <section class="general_stars" id="fork_stars">
-                                <p><a href="ratingform.php?restaurant=11" class="linkToPop">Review</a></p>
-                                <?php doStars(11); ?>
-                            </section>
-                        </section>
-                    </td>
-                    <td class="restaurantbloc">
-                        <section class="restaurantSection" >
-                            <h3>
-                            Theatre Cafe
-                            </h3>
-                            <a href="https://oppositethearch.co.za" target="_blank">
-                            <img src="Media\theatre cafe.jpg" alt="www.oppositethearch.co.za" class="restaurantimg" >
-                            </a>
-                            <p>Cafe<br>
-                            Prince Alfred Stt<br>
-                            <a href="mailto:eat@majorfrasers.co.za">email</a><br>
-                            <a href="tel:713505439">713505439</a><br>
-                            Hours: 8am-5pm
-                            </p>
-                            <section class="general_stars" id="theatre_stars">
-                                <p><a href="ratingform.php?restaurant=12" class="linkToPop">Review</a></p>
-                                <?php doStars(12); ?>
-                            </section>
-                        </section>  
-                    </td>
-                </tr>
-            </table>
-        </section>
-
-<!--the review form is currently here-->
-
-</section>
+                $sql = "SELECT * FROM restaurants WHERE resid = $j";
+                $result = $conn->query($sql);
+                $row=$result->fetch_assoc();
+                $restaurantName = $row['resname'];
+                echo "<h3>".$restaurantName."</h3>";
+                $restaurantWebsite = $row['website'];
+                $imgsrc='Media\\';
+                $imgsrc .= $row['photoURL'];
+                echo "<a href=".$restaurantWebsite.">";
+                echo "<img src=".$imgsrc." class='restaurantimg'>";
+                echo "</a>";
+                echo "<p>".$row['resaddress']."</p>";
+                $telno = $row['resphone'];
+                echo "<p><a href='tel:".$telno."'>".$telno."</a></p>";
+                $hours="Hours: ";
+                //date("H:i", strtotime($mysqlTime))
+                $hours.=date("H:i",strtotime($row['startTime']));
+                $hours.="am - ";
+                $hours.=date("H:i",strtotime($row['endTime']));
+                $hours.="pm";
+                echo "<p>".$hours."</p>";
+                echo "<section class='general_stars'>";
+                echo "<p><a href='ratingform.php?restaurant=$j' class='linkToPop'>Review</a></p>";
+                    doStars($j); 
+                echo"</section>"; //general stars section ends here
+        echo "</section>"; //restaurant section ends here          
+        echo"</td>"; //table bloc ends here
+        if ($j%4==0){
+            echo "<tr class='restaurantRow'>";
+        }
+        $j++;
+    }
+    if (($j - 1) % 4 !== 0) {
+        echo "</tr>";
+    }
+    echo "</table>"; //table ends here 
+    echo "</section>"; //tablewrapper ends here
+?>
     <?php include 'Reusable\footer.php';?><!--footer-->
     </body>
 </html>
-

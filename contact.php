@@ -7,7 +7,6 @@ if (!isset($_SESSION["loggedIn"])) {
     
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,10 +24,9 @@ if (!isset($_SESSION["loggedIn"])) {
     <body >
     <?php include 'Reusable\heading.php';?><!--heading-->
         <h2>Contact the Grahamstown Grub Stop
-            <div id="thanks">Thank you for your interest!</div>
         </h2>
             <section class="col">
-              <form id="contactForm" method="post">
+              <form id="contactForm" method="post" action="contactFormValidation.php">
                   <h3>Get in touch</h3>
                   <p>Leave us a message and we will respond to your question or comment</p>
                   <p id="reqFieldErrorMsg"></p>
@@ -49,7 +47,7 @@ if (!isset($_SESSION["loggedIn"])) {
                   </section>
                   <section class="inputgroup">
                       <label for="msg">Message</label><br>
-                      <textarea id="msg" name="msg"  rows="10"></textarea><br>
+                      <textarea id="msg" name="msg"  rows="10" class="requiredField"></textarea><br>
                       <button type="submit">Send</button>  
                   </section>
               </form>

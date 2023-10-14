@@ -16,7 +16,13 @@
         //review fields are commentid, resid, useremail, rating, comment, commentdate, username
         $resid = htmlspecialchars($_POST['resid']);
         $email = htmlspecialchars($_SESSION['email']);
-        $rating = htmlspecialchars($_POST["rating"]);
+        $rating=0;
+        if (!isset($_POST["rating"])){
+            $rating=0;
+        }
+        else{
+            $rating = htmlspecialchars($_POST["rating"]);
+        }
         $comment = htmlspecialchars($_POST["comment"]);
         $comment = trim($comment);
         $comment = stripslashes($comment);
@@ -25,39 +31,46 @@
         $name = trim($name);
         $name = stripslashes($name);
         $errors =[];
-        if ($resid==0 || $resid ==null){
-            $errors['restaurant']="Restaurant must be selected for review";
-        }
-        if (empty($email)){
-            $errors["reviewerEmail"]="Email is required";
-        }
-        if(empty($rating)){
-            $errors["rating"]="At least one star is required";
-        }
+        $oldcomid = htmlspecialchars($_POST['oldcomid']);
         if (empty($comment)){
-            $errors["comment"]="comment is required";
+            $errors["commentError"]="**A comment is required to submit a review";
         }
-        if (empty($name)){
-            $errors["reviewerName"]="Name is required";
-        }
-
-        if(empty($errors)){
-            echo $name;
-            echo "<p> Is this working? </p>";
-            
-            $eql ="INSERT INTO reviews (resid, UserEmail, rating, comment, commentdate, username) 
-            VALUES ($resid,'$email','$rating','$comment','$date','$name') ";
-            $result = $conn->query($eql);
-
-            header("Location: ratingForm.php?success=true");
-            exit;
-        }
-        else {
-            // Redirect with errors and field values as query parameters
-            $errorString = http_build_query(['errors' => $errors, 'fields' => $_POST]);
+        if (!empty($errors)) {
+            // Redirect with commentError
+            $errorString = http_build_query(['errors' => $errors]);
             header("Location: ratingForm.php?$errorString");
             exit;
         }
+        if(empty($errors)){
+            //echo $name;
+            //echo "<p> Is this working? </p>";
+            if ($oldcomid==-1){
+                $eql ="INSERT INTO reviews (resid, UserEmail, rating, comment, commentdate, username) 
+                VALUES ($resid,'$email','$rating','$comment','$date','$name') ";
+                $result = $conn->query($eql);
+
+                if ($result==TRUE){
+                    header("Location: ratingForm.php?success=true");
+                    exit;
+                }
+                else{
+                    header("Location: ratingForm.php?success=false"); //user is not logged in ---could not enter comment into table (should not actually be possible to get here, but just in case)
+                }
+            }
+            else{
+                $fql = "UPDATE reviews SET comment = '$comment', rating=$rating, edited=1,  WHERE commentid = $oldcomid";
+                $res = $conn->query($fql);
+                if ($res==TRUE){
+                    header("Location: ratingForm.php?doneediting=true");
+                    exit;
+                }
+                else{
+                    header("Location: ratingForm.php?doneediting=false"); 
+                }
+
+            }
+        }
+
     }
     
 

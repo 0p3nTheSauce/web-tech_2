@@ -30,7 +30,8 @@
     </head>
     <body>
         <?php include 'Reusable\heading.php';?><!--heading-->
-        <section id="form-restaurant-section">    
+        <section id="form-restaurant-section"> 
+            <?php if (isset($_GET['editing'])){ echo "<div id='editcom' style='background-color:white; text-align:center; color:red; padding:1%; margin:auto; width:60%;'><p>Edit your original comment in the <a href='#editer'>form</a></p></div>";} ?>
             <?php 
             if (isset($_GET['restaurant'])) {
                 //echo "restaurant:";
@@ -67,11 +68,6 @@
                 echo "</section>";           
             ?>
         <section class="restaurantReviewForm">
-            <?php if(!empty($_GET['errors'])&& !empty($_GET['fields'])){
-                $errors=$_GET['errors'];
-                $fields =$_GET['fields'];
-            }
-            ?>
             <form action="reviewValidateAndShow.php" method="POST" >
                 <h3 id="resto_title"></h3>
                 <input type='hidden' name ='resid' value='<?php echo $clicked_id; ?>'>
@@ -79,30 +75,81 @@
                 <?php if ($_SESSION["loggedIn"]) { echo "Hello, ". $_SESSION["userName"]."<br/><br/>"; } ?>
                 <?php if (!($_SESSION["loggedIn"])){echo "<p> Please <a href='signin.php'>log in</a> first to leave a review. </p>";}?>
                 <?php if (($_SESSION["loggedIn"])){ 
+                    $originalComment='';
+                    $originalRating=0;
+                    $oldcomid=-1;
+                    $checked1='';
+                    $checked2='';
+                    $checked3='';
+                    $checked4='';
+                    $checked5='';
+
+                    if (isset($_GET['editing'])){
+                        if ($_GET['editing']=="inprogress"){
+                            echo "<p>*Edit your original comment </p>";
+                            if (isset($_GET['commentid'])){
+                                $oldcomid=$_GET['commentid'];
+                                //echo "<p>".$oldcomid."</p>";
+                            }
+                            if (isset($_GET['oldrating'])){
+                                $originalRating=$_GET['oldrating'];
+                                echo "<p> *Would you like to change your rating from a ".$originalRating."?</p>"; 
+                                switch($originalRating){
+                                    case(1):
+                                        $checked1='checked';
+                                        break;
+                                    case(2):
+                                        $checked2='checked';
+                                        break;
+                                    case(3):
+                                        $checked3='checked';
+                                        break;
+                                    case(4):
+                                        $checked4='checked';
+                                        break;
+                                    case(5):
+                                        $checked5='checked';
+                                        break;
+                                    case(0):
+                                        break;
+
+                                }
+                            }
+                            if (isset($_GET['oldcomment'])){
+                                $originalComment=$_GET['oldcomment'];
+                            }
+                        }
+                }
                     echo
-                '<label>Rate the restaurant out of five:</label><br>
+                '<label><a id="editer">Rate the restaurant out of five:</a></label><br>
                 <section class="star-rating-group">
-                    <input type="radio" id="rating-1" name="rating" value="1" />
+                    <input type="radio" id="rating-1" name="rating" value="1" ' .$checked1 . '/>
                     <label for="rating-1" class="fa fa-star" id="star-1"></label>
-                    <input type="radio" id="rating-2" name="rating" value="2" />
+                    <input type="radio" id="rating-2" name="rating" value="2" '. $checked2 .'/>
                     <label for="rating-2" class="fa fa-star" id="star-2"></label>
-                    <input type="radio" id="rating-3" name="rating" value="3" />
+                    <input type="radio" id="rating-3" name="rating" value="3" '. $checked3  .'/>
                     <label for="rating-3" class="fa fa-star" id="star-3"></label>
-                    <input type="radio" id="rating-4" name="rating" value="4" />
+                    <input type="radio" id="rating-4" name="rating" value="4" '. $checked4  .'/>
                     <label for="rating-4" class="fa fa-star" id="star-4"></label>
-                    <input type="radio" id="rating-5" name="rating" value="5" />
+                    <input type="radio" id="rating-5" name="rating" value="5" '. $checked5  .'/>
                     <label for="rating-5" class="fa fa-star" id="star-5"></label>
                 </section>
                 <br>';} ?>
+
+                <input type='hidden' name='oldcomid' value='<?php echo $oldcomid ?>'>
+
                 <?php if (($_SESSION["loggedIn"])){ 
-                    if (isset($fields['comment'])){ echo "<p class='mandate'>***A written comment is mandatory!</p>";}
+                       if(!empty($_GET['errors'])){
+                            $errors=$_GET['errors'];
+                        }
+                    if (isset($errors['commentError'])){ echo "<p class='mandate'>".$errors['commentError']."</p>";}
                     echo 
                 '<label for="comment">*Comments</label><section class="error"></section>
                 <section class="comment-group">                    
-                    <textarea id="comment" name="comment" placeholder="Share your experience of eating at the restaurant..." rows="20"></textarea><br>
+                    <textarea id="comment" name="comment" placeholder="Share your experience of eating at the restaurant..." rows="20">'.$originalComment.'</textarea><br>
                 </section>
                 <button type="submit" id="submit_review_btn">Submit review</button>';} ?>
-                <section><?php if (!empty($_GET['success'])){echo "<p class='success-mandate'>Your review was submitted successfully</p>";} ?></section>
+                <section><?php if (!empty($_GET['success'])&& $_GET['success']==true ){echo "<p class='success-mandate'>Your review was submitted successfully</p>";} ?></section>
             </form>   
         </section> <!--form container popup review-->   
         </section><!--contains restaurant image and review-->
@@ -118,7 +165,19 @@
                 }
                 echo "</section>";
             }
+            if(isset($_GET['doneediting'])){
+                echo "<section id='successfulDel'>";
+                if ($_GET['doneediting']=='true'){
+                    echo "<span>&#9989;</span> Your comment was edited successfully";
+                }
+                else{
+                    echo "Your original comment will remain forever";
+                }
+                echo "</section>";
+            }
             getComments($conn, $clicked_id); ?>
+
+
         </section>
         
        

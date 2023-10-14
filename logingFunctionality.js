@@ -15,3 +15,12 @@ function confirmSubmissionLogout() {
     return false; // Prevent the form from being submitted
   }
 }
+
+function confirmSubmissionDeleteAdmin() {
+  if (confirm("Are you sure you want to Delete this user's account?")) {
+    return true; // Proceed with the form submission
+  } else {
+    document.getElementById("demo").innerHTML = "Deletion canceled.";
+    return false; // Prevent the form from being submitted
+  }
+}

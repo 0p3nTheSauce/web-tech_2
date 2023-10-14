@@ -34,10 +34,10 @@ $sql = "CREATE TABLE Users (
 */
 // $sql = "ALTER TABLE Users 
 // MODIFY UserPassword VARCHAR(100)";
-// $passwordU = "Spider1!";
+// $passwordU = "Penguin0!";
 // $hased_password = password_hash($passwordU, PASSWORD_DEFAULT);
-// $sql = "INSERT INTO users (UserEmail, UserName, IsAdmin, UserPassword)
-//                 VALUES ('g21g8924@campus.ru.ac.za', 'Luke Goodall', 1, '$hased_password')";
+//  $sql = "INSERT INTO users (UserEmail, UserName, IsAdmin, UserPassword)
+//                VALUES ('rademancaron@gmail.com', 'Caron Rademan', 1, '$hased_password')";
 
 if ($conn->query($sql) === TRUE) {
   echo "Table Users ALTERED successfully";

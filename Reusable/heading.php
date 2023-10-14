@@ -5,12 +5,13 @@
 if (!isset($_SESSION["loggedIn"])) {
     $_SESSION["loggedIn"] = false;
 } 
-if (!isset($_SESSION["IsAdmin"])) {
-  $_SESSION["IsAdmin"] = false;
+if (!isset($_SESSION["isAdmin"])) {
+  $_SESSION["isAdmin"] = false;
 } 
 echo '
   <header>
     <section id="topOfPage"></section>
+    <a href="top"></a>
     <nav>
       <ul>
         <li id="logo">
@@ -57,7 +58,7 @@ echo
         if ($_SESSION["isAdmin"]) { // only admins can view
           echo '<li class="simplenavlink">
           <div class="hiddenLinks">
-            <a href="playground.php">Playground</a>
+            <a href="playground.php">Delete accounts</a>
           </div>
           </li>';
         }
@@ -72,11 +73,13 @@ echo
           <a href="restaurants.php">Restaurants</a>
           <div class="hiddenLinks">
             <a href="signup.php">Login</a> 
-          </div>
-          <div class="hiddenLinks">
-            <a href="playground.php">Playground</a>
-          </div>
-          <div class="hiddenLinks">
+          </div>'; 
+          if ($_SESSION["isAdmin"]) { // only admins can view
+            echo '<div class="hiddenLinks">
+            <a href="playground.php">Delete accounts</a>
+          </div>';
+          }
+echo '    <div class="hiddenLinks">
             <a href="gallery.php">Gallery</a>
           </div>
         </section>';
