@@ -47,14 +47,15 @@ $passwordU = $_SESSION["passwordU"];
     </head>
     <body >
     <div>
-        <?php include 'Reusable\heading.php';?>
+        <?php include 'Reusable\heading.php';
+        ?>
     </div>
 
 <section class="outer-form-container">
     <section class="form-box">
         <h1 id="form_title">Login</h1>
         <p><span class="errors">* required field</span></p>
-        <form method="post" action="signInValidation.php"> <!--Validation done in in same  file-->
+        <form method="post" action="signInValidation.php"> 
             <p id="error"></p>
             <section class="input-group">
                 <section class="input-field">

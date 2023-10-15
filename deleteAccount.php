@@ -6,6 +6,7 @@ $email = $_SESSION["email"];
 $emailErr = $passwordErr = "";
 $passwordU = "";
 $passwordOK = true;
+$report = "Deletion unsuccessful";
 // check if delete account button has been activated
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["passwordU"])) {
@@ -55,34 +56,50 @@ if ($passwordOK) {
     die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT UserPassword FROM users WHERE UserEmail='$email'";
-    $result = $conn->query($sql);
+    // old  unsafe sql
+    // $sql = "SELECT UserPassword FROM users WHERE UserEmail='$email'";
+    // $result = $conn->query($sql);
 
-    if ($result) {
-        // Check if the query was successful
-        if ($result->num_rows > 0) {
-            // Fetch the data from the result object
-            $row = $result->fetch_assoc();
-            $passwordFromDatabase = $row['UserPassword'];
-        } else {
-            $emailErr =  "No results found for the given email.";
-        }
-    } else {
-        echo "Query failed: " . $conn->error;
-    }
+    //prepare to bind 
+    $stmt = $conn->prepare("SELECT UserPassword FROM users WHERE UserEmail = ?");
+    $stmt->bind_param("s", $email);
+    //execute
+    // $result = $stmt->execute();
+    $stmt->execute();
+
+    //bind result variable
+    $stmt->bind_result($passwordFromDatabase);
+
+    //fetch value
+    $stmt->fetch();
+
+    //close prepare statement for password retrievel
+    $stmt->close();
+    
     $verified = password_verify($passwordU, $passwordFromDatabase);  // check User password
     //passwords are hashed when placed in the database
     if ($verified) {
-        $sql = "DELETE FROM users WHERE UserEmail = '$email'";
-        if ($conn->query($sql) === TRUE) {
-            $deletedSuccessfully = true;
-            //Unset session variables 
-            session_unset();
-            $_SESSION["loggedIn"] = false;
-            $_SESSION["IsAdmin"] = false;
-        }else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+        
+        if ($stmt = $conn->prepare("DELETE FROM users WHERE UserEmail = ?")) {
+            $stmt->bind_param("s", $email);
+        
+            if ($stmt->execute()) {
+                $deletedSuccessfully = true;
+                $report = "Deletion successful";
+                // Unset session variables 
+                session_unset();
+                $_SESSION["loggedIn"] = false;
+                $_SESSION["IsAdmin"] = false;
+            } else {
+                $report = "Error: " . $stmt->error;
+            }
+        
+            $stmt->close(); // Close the prepared statement
+        } else {
+            $report = "Error: " . $conn->error;
         }
+        
+
     } else {
         $passwordErr = "Incorrect password";
     }
@@ -93,6 +110,7 @@ if ($_SESSION["loggedIn"]) { // make the password go away once user has deleted 
 }
 $_SESSION["passwordErr"] = $passwordErr;
 $_SESSION["emailErr"] = $emailErr;
+$_SESSION["report"] = $report;
 if ($deletedSuccessfully) {
     header('Location: signup.php');
 } else {

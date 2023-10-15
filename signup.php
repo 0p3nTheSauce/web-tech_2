@@ -36,6 +36,9 @@ if (!isset( $_SESSION["email"])){
 if (!isset($_SESSION["emailErrSignup"])){
     $_SESSION["emailErrSignup"] = "";
 }
+if (!isset($_SESSION["report"])) {
+    $_SESSION["report"] = "";
+}
 $name = $_SESSION["userName"];
 $nameErr = $_SESSION["nameErr"];
 $passwordU = $_SESSION["passwordU"];
@@ -44,6 +47,7 @@ $repPassword = $_SESSION["repPassword"];
 $repPasswordErr = $_SESSION["repPasswordErr"];
 $email = $_SESSION["email"];
 $emailErrSignup = $_SESSION["emailErrSignup"];
+$report = $_SESSION["report"];
 
 ?>
 
@@ -74,7 +78,11 @@ $emailErrSignup = $_SESSION["emailErrSignup"];
         <!-- <h1 id="form_title">Register</h1> -->
         <p><span class="errors">* required field</span></p>
         <form method="post" action="signUpValidation.php"> <!--Validation done in in same  file-->
-            <p id="error"></p>
+        <?php if ($report != ""){
+        echo "<script>alert('", $report, "')</script>";
+        $_SESSION["report"] = ""; //only alert us once please
+        }?>    
+        <p id="error"></p>
             <section class="input-group">
                 <section class="input-field" id="name_field">
                     <i class="material-symbols-outlined">person</i>

@@ -113,6 +113,7 @@ $userAdmins = $_SESSION["userAdmins"];
 
 <section class="login_information">
 <h1><?php echo  $nameAdmin;?> is signed in as <?php echo  $usertype;?> </h1>
+<h1>Look at <a href="lookAtLog.php">log</a></h1>
 </section> 
 
 <div class="two_column">

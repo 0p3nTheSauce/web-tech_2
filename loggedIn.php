@@ -20,8 +20,13 @@ if (!isset($_SESSION["passwordErr"])){
 if (!isset($_SESSION["isAdmin"])){
     $_SESSION["isAdmin"] = "";
 }
+if (!isset($_SESSION["report"])) {
+    $_SESSION["report"] = "";
+}
+
 $passwordU = $_SESSION["passwordU"];
 $passwordErr = $_SESSION["passwordErr"];
+$report = $_SESSION["report"];
 if ($_SESSION["isAdmin"]) {
     $usertype = "Admin";
 } else {
@@ -53,7 +58,7 @@ if ($_SESSION["isAdmin"]) {
     <section class="form-box">
         <?php 
             if ($_SESSION["loggedIn"]){
-                echo '<h1 id="form_title">', $_SESSION["userName"], 'Is logged in as',  $usertype;
+                echo '<h1 id="form_title">', $_SESSION["userName"], ' Is logged in as ',  $usertype;
             } else {
                 header('Location: signin.php');
             }
@@ -74,6 +79,10 @@ if ($_SESSION["isAdmin"]) {
         <h1 id="form_title">Delete account</h1>
         <p><span class="errors">* required field</span></p>
         <form method="post" action="deleteAccount.php" onsubmit="return confirmSubmissionDelete()"> <!--Pop up confirm delete account-->
+        <?php if ($report != ""){
+        echo "<script>alert('", $report, "')</script>";
+        $_SESSION["report"] = ""; //only alert us once please
+        }?>
         <p id="error"></p>
             <section class="input-field">
                 <i class="material-symbols-outlined">lock</i>

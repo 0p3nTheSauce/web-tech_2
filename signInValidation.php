@@ -1,6 +1,8 @@
 <?php 
 //Start the session 
 session_start();
+//logging
+include 'testlogging.php';
 
 // define variable and set to empty values 
 $loginSuccessful = false;
@@ -14,6 +16,10 @@ $emailOK = $passwordOK = true;
 $emailErr = $passwordErr = "";
 $email = $passwordU = "";
 $verified = false;
+
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["email"])) {
         $emailErr = "Email is required";
@@ -110,9 +116,12 @@ $_SESSION["passwordErr"] = $passwordErr;
 $_SESSION["email"] = $email;
 $_SESSION["passwordU"] = $passwordU;
 
+
 if ($loginSuccessful) {
+    logAttempt('successful_login',$userName,$email,$isAdmin);
     header('Location: loggedIn.php');
 } else {
+    logAttempt('unsuccessful_login','unidentified',$email,'false');
     header('Location: signin.php');
 }
 ?>

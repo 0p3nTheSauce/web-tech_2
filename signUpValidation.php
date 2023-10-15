@@ -1,6 +1,7 @@
 <?php 
 //Start the session 
 session_start();
+include 'testlogging.php';
 // define variable and set to empty values 
 $_SESSION["loggedIn"] = false;
 $_SESSION["userName"] = "";
@@ -16,6 +17,8 @@ $createdSuccessfully = false;
 $nameOK = $emailOK = $passwordOK = $repPasswordOK = true;
 $nameErr = $emailErrSignup = $passwordErr = $repPasswordErr = "";
 $name = $email = $passwordU = $repPassword = "";
+
+$report = "Account creation unsuccessful.";
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // validation of user input
     if (empty($_POST["name"])) {
         $nameErr = "Name is required";
@@ -104,7 +107,7 @@ if ($nameOK && $emailOK && $passwordOK && $repPasswordOK ) {
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM users"; // this sql does not need to be parameterized as it takes no input from users 
     $result = $conn->query($sql);
     $userExists = false;
     while ($row=$result->fetch_assoc()) { // search to see if username is unique
@@ -124,16 +127,29 @@ if ($nameOK && $emailOK && $passwordOK && $repPasswordOK ) {
     }
     if (!$userExists) { //sign up successful 
         $hashedpassword = password_hash($passwordU, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (UserEmail, UserName, IsAdmin, UserPassword)
-                VALUES ('$email', '$name', 0, '$hashedpassword')";
-        if ($conn->query($sql) === TRUE) {
+
+        // $sql = "INSERT INTO users (UserEmail, UserName, IsAdmin, UserPassword)
+        //         VALUES ('$email', '$name', 0, '$hashedpassword')";
+
+        // prepare to bind 
+        $stmt = $conn->prepare("INSERT INTO users (UserEmail, UserName, IsAdmin, UserPassword)
+                                VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssis", $email, $name, $notAdmin, $hashedpassword);
+        $notAdmin = 0;
+        //execute
+        $stmt->execute();
+                
+
+        if ($stmt == TRUE) {
             $createdSuccessfully = true;
+            $report = "Account created successully.";
             //Set session variables 
             $_SESSION["loggedIn"] = true;
             $_SESSION["isAdmin"] = $isAdmin;
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            $report =  "Error: " . $stmt . "<br>" . $stmt->error;
         }
+        $stmt->close();
     }
     
     $conn->close();
@@ -146,10 +162,13 @@ $_SESSION["repPassword"] =$repPassword;
 $_SESSION["repPasswordErr"] =$repPasswordErr;
 $_SESSION["email"] = $email;
 $_SESSION["emailErrSignup"] = $emailErrSignup;
+$_SESSION["report"] = $report;
 
 if ($createdSuccessfully) {
+    logAttempt('successful_signup',$name,$email,$isAdmin);
     header('Location: loggedIn.php');
 } else {
+    logAttempt('unsuccessful_signup',$name,$email,'false');
     header('Location: signup.php');
 }
 ?>
