@@ -77,48 +77,51 @@ if ($passwordOKAdmin) {
     die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT UserPassword FROM users WHERE UserEmail='$emailAdmin'";
-    $result = $conn->query($sql);
+    //prepare to bind 
+    $stmt = $conn->prepare("SELECT UserPassword FROM users WHERE UserEmail = ?");
+    $stmt->bind_param("s", $emailAdmin);
+    //execute
+    // $result = $stmt->execute();
+    $stmt->execute();
 
-    if ($result) {
-        // Check if the query was successful
-        if ($result->num_rows > 0) {
-            // Fetch the data from the result object
-            $row = $result->fetch_assoc();
-            $passwordFromDatabase = $row['UserPassword'];
-        } else {
-            $emailErrUser =  "No results found for the given Admin email.";
-        }
+    //bind result variable
+    $stmt->bind_result($passwordFromDatabase);
+
+    //fetch value
+    $stmt->fetch();
+
+    //close prepare statement for password retrievel
+    $stmt->close();
+
+    // Check if a result was found
+    if (empty($passwordFromDatabase)) {
+        $emailErrUser = "No results found for the given Admin email.";
+        $emailOKUser = false;
+
     } else {
-        echo "Query failed: " . $conn->error;
-    }
-    $verified = password_verify($passwordU, $passwordFromDatabase);  //            check admin password
-    if ($verified) {
-        $sql = "SELECT UserEmail FROM users WHERE UserEmail='$emailUser'";
-        $result = $conn->query($sql);
-
-        if ($result) {
-            // Check if the query was successful
-            if (!$result->num_rows > 0) {                            // check if the user exists
-                $emailErrUser =  "No results found for the given User email.";
-                $emailOKUser = false;
-            } 
-        } else {
-            echo "Query failed: " . $conn->error;
-        }
-
+        $verified = password_verify($passwordU, $passwordFromDatabase);  // check User password
+        //passwords are hashed when placed in the database
         if ($emailOKUser) {
-            $sql = "DELETE FROM users WHERE UserEmail = '$emailUser'";
-            if ($conn->query($sql) === TRUE) {
-                $deletedSuccessfully = true;
+            if ($verified) {
+                if ($stmt = $conn->prepare("DELETE FROM users WHERE UserEmail = ?")) {
+                    $stmt->bind_param("s", $emailUser);
                 
-            }else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                    if ($stmt->execute()) {
+                        $deletedSuccessfully = true;
+                        $report = "Deletion successful";
+                    } else {
+                        $report = "Error: " . $stmt->error;
+                    }
+                    $stmt->close(); // Close the prepared statement
+                } else {
+                    $report = "Error: " . $conn->error;
+                }
+                
+    
+            } else {
+                $passwordErr = "Incorrect password";
             }
         }
-
-    } else {
-         $passwordErrAdmin = "Incorrect password";
     }
     $conn->close();
 }  

@@ -60,7 +60,7 @@ if ($_SESSION["isAdmin"]) {
             if ($_SESSION["loggedIn"]){
                 echo '<h1 id="form_title">', $_SESSION["userName"], ' Is logged in as ',  $usertype;
             } else {
-                header('Location: signin.php');
+                header('Location: signin.php'); //unauthorized access
             }
         ?>
         <form method="post" action="signOut.php" onsubmit="return confirmSubmissionLogout()" > 

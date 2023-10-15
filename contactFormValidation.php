@@ -36,7 +36,6 @@
         if (!filter_var($em, FILTER_VALIDATE_EMAIL)) { //email
             $errors['emailError'] = "*Invalid email format ";
             $emailOK = false;
-
         }
 
         if (strlen($em) > 50) {                      

@@ -10,9 +10,4 @@ function logAttempt($status,$username, $useremail){
     file_put_contents($log_file, $entry, FILE_APPEND);
 
 }
-/*$status='successful';
-$username = 'Caron';
-logAttempt($status, $username,$useremail);
-*/
-
 ?>

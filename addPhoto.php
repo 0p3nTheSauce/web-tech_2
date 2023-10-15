@@ -1,14 +1,17 @@
 <?php
-$target_dir = "uploadedMedia\\";
-$target_file = $target_dir . basename($_FILES["file_upload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-$image = $_FILES["file_upload"]["tmp_name"];
-
 error_reporting(E_ERROR | E_PARSE);
 // Check if image file is a actual image or fake image
 if(isset($_POST["img_submit"])) {
+  $target_dir = "uploadedMedia\\";
+  $target_file = $target_dir . basename($_FILES["file_upload"]["name"]);
+  $uploadOk = 1;
+  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+  $image = $_FILES["file_upload"]["tmp_name"];
+
+
   $check = getimagesize($_FILES["file_upload"]["tmp_name"]);
+  $resid = $_POST['Restaurantid'];
+
   if($check !== false) {
     echo "File is an image - " . $check["mime"] . ".<br>";
     $uploadOk = 1;
@@ -16,9 +19,8 @@ if(isset($_POST["img_submit"])) {
     echo "File is not an image.<br>";
     $uploadOk = 0;
   }
-}
 
-// Check if file already exists
+  // Check if file already exists
 if (file_exists($target_file)) {
   echo "Sorry, file already exists.<br>";
   $uploadOk = 0;
@@ -46,12 +48,14 @@ if ($uploadOk == 0) {
 
   //converts image to binary
   $imgContent = addslashes(file_get_contents($image));
+  
+
+  // Create connection
   $servername = "cs3-dev.ict.ru.ac.za";
   $username = "G19M8152";
   $password = "G19M8152";
-
-  // Create connection
-  $conn = new mysqli($servername, $username, $password);
+  $database = "compKing";
+  $conn = new mysqli($servername, $username, $password,$database);
 
   // Check connection
   if ($conn->connect_error) {
@@ -70,16 +74,17 @@ if ($uploadOk == 0) {
 
   //Insert image into table 
   $sql = "INSERT INTO images (resid,image,created)
-          VALUES ('12','$imgContent',NOW())";
+          VALUES ('$resid','$imgContent',NOW())";
   
   if ($conn->query($sql) === TRUE){
+    move_uploaded_file($_FILES["file_upload"]["tmp_name"], $target_file);
     echo "The file ". htmlspecialchars( basename( $_FILES["file_upload"]["name"])). " has been uploaded.";
     echo "Entered successfully";
   }
    else {
     echo "Sorry, there was an error uploading your file.";
   }
-  //header("Location: gallery.php");
+  
 }
-
+}
 ?>

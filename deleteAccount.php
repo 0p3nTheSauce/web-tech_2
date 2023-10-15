@@ -76,32 +76,36 @@ if ($passwordOK) {
     //close prepare statement for password retrievel
     $stmt->close();
     
-    $verified = password_verify($passwordU, $passwordFromDatabase);  // check User password
-    //passwords are hashed when placed in the database
-    if ($verified) {
-        
-        if ($stmt = $conn->prepare("DELETE FROM users WHERE UserEmail = ?")) {
-            $stmt->bind_param("s", $email);
-        
-            if ($stmt->execute()) {
-                $deletedSuccessfully = true;
-                $report = "Deletion successful";
-                // Unset session variables 
-                session_unset();
-                $_SESSION["loggedIn"] = false;
-                $_SESSION["IsAdmin"] = false;
-            } else {
-                $report = "Error: " . $stmt->error;
-            }
-        
-            $stmt->close(); // Close the prepared statement
-        } else {
-            $report = "Error: " . $conn->error;
-        }
-        
-
+    // Check if a result was found
+    if (empty($passwordFromDatabase)) {
+        $emailErr = "No results found for the given Admin email.";
     } else {
-        $passwordErr = "Incorrect password";
+        $verified = password_verify($passwordU, $passwordFromDatabase);  // check User password
+        //passwords are hashed when placed in the database
+        if ($verified) {
+            if ($stmt = $conn->prepare("DELETE FROM users WHERE UserEmail = ?")) {
+                $stmt->bind_param("s", $email);
+            
+                if ($stmt->execute()) {
+                    $deletedSuccessfully = true;
+                    $report = "Deletion successful";
+                    // Unset session variables 
+                    session_unset();
+                    $_SESSION["loggedIn"] = false;
+                    $_SESSION["IsAdmin"] = false;
+                } else {
+                    $report = "Error: " . $stmt->error;
+                }
+            
+                $stmt->close(); // Close the prepared statement
+            } else {
+                $report = "Error: " . $conn->error;
+            }
+            
+
+        } else {
+            $passwordErr = "Incorrect password";
+        }
     }
     $conn->close();
 }   
